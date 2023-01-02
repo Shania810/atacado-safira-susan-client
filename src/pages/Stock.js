@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Products } from '../components/Products'
 import Api from '../utils/api'
 export const Stock = () => {
     const [products,setProducts] = useState()
@@ -16,7 +17,9 @@ export const Stock = () => {
   return (
     <div>
         <h1>Stock</h1>
-        <div></div>
+        <div>
+            <Products products={products} />
+        </div>
     </div>
   )
 }

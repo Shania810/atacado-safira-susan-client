@@ -1,7 +1,8 @@
 import React from 'react'
+import { Product } from './Product'
 
-export const Products = () => {
+export const Products = ({products}) => {
   return (
-    <div>Products</div>
+    products.map((product)=> <Product product={product} /> )
   )
 }
