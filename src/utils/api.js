@@ -13,5 +13,13 @@ class Api {
         throw error        
       }
    }
+   getCategories = async() =>{
+    try {
+      const {data} = await this.api.get('/category')
+      return data      
+    } catch (error) {
+      throw error
+    }
+   }
 }
 export default new Api()
