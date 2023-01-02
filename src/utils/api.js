@@ -2,7 +2,7 @@ import axios from 'axios'
 class Api {
    constructor(){
       this.api = axios.create({
-        baseURL: 'http://loaclhost:4000/'
+        baseURL: 'http://localhost:4000/'
       })
    }
    getProducts = async() =>{
