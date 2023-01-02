@@ -16,7 +16,7 @@ export const Stock = () => {
     },[])
   return (
     <div>
-        <h1>Stock</h1>
+        <h1>Estoque</h1>
         <div>
             <Products products={products} />
         </div>
