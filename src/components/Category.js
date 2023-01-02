@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Category = ({category}) => {
+export const Category = ({ category }) => {
   return (
     <div>
-      <button>{category.name}</button>
+      <button>{category}</button>
     </div>
   )
 }
