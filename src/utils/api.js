@@ -21,9 +21,9 @@ class Api {
       throw error
     }
   }
-  postCategory = async () => {
+  postCategory = async (object) => {
     try {
-      await this.api.post('/category')
+      await this.api.post('/category',object)
     } catch (error) {
       throw error
     }
