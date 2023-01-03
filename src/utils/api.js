@@ -5,15 +5,18 @@ class Api {
       baseURL: 'http://localhost:4000/'
     })
   }
-  getProducts = async (categoryId) => {
+  getProducts = async () => {
     try {
-      if(categoryId){
-        const {data} = await this.api.get('/product',{category: categoryId})
-        return data
-      }else{
-        const {data} = await this.api.get('/product')
-        return data
-      }
+      const { data } = await this.api.get('/product')
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
+  getProductsFiltered = async (categoryId) => {
+    try {
+      const { data } = await this.api.get(`/product/${categoryId}`)
+      return data
     } catch (error) {
       throw error
     }
@@ -28,7 +31,7 @@ class Api {
   }
   postCategory = async (object) => {
     try {
-      await this.api.post('/category',object)
+      await this.api.post('/category', object)
     } catch (error) {
       throw error
     }

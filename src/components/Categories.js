@@ -19,7 +19,7 @@ export const Categories = ({productsFiltered}) => {
   }, [])
   return (
     <CategoriesCard>
-      {categories.map((category) => <Category key={category._id} category={category.name} onClick={productsFiltered(category._id)} />)}
+      {categories.map((category) => <Category key={category._id} category={category} productsFiltered={productsFiltered}/>)}
       <AddCategory allCategories = {allCategories} />
     </CategoriesCard>
   )

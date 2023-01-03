@@ -17,7 +17,7 @@ export const Stock = () => {
   }, [])
   const productsFiltered = async(category) => {
     try {
-     const productsFiltered = await Api.getProducts(category)
+     const productsFiltered = await Api.getProductsFiltered(category)
      setProducts(productsFiltered)
     } catch (error) {
       console.log(error)
