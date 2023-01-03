@@ -15,11 +15,19 @@ export const Stock = () => {
     }
     allProducts()
   }, [])
+  const productsFiltered = async(category) => {
+    try {
+     const productsFiltered = await Api.getProducts(category)
+     setProducts(productsFiltered)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div>
       <h1>Estoque</h1>
       <div>
-        <Categories />
+        <Categories productsFiltered={productsFiltered} />
         <Products products={products} />
       </div>
     </div>

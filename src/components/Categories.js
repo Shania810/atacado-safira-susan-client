@@ -6,21 +6,21 @@ import { Category } from './Category'
 
 export const Categories = () => {
   const [categories, setCategories] = useState([])
-  useEffect(() => {
-    const allCategories = async () => {
-      try {
-        const categories = await Api.getCategories()
-        setCategories(categories)
-      } catch (error) {
-        console.log(error)
-      }
+  const allCategories = async () => {
+    try {
+      const categories = await Api.getCategories()
+      setCategories(categories)
+    } catch (error) {
+      console.log(error)
     }
+  }
+  useEffect(() => {
     allCategories()
   }, [])
   return (
     <CategoriesCard>
       {categories.map((category) => <Category key={category._id} category={category.name} />)}
-      <AddCategory/>
+      <AddCategory allCategories = {allCategories} />
     </CategoriesCard>
   )
 }
