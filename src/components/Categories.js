@@ -4,7 +4,7 @@ import Api from '../utils/api'
 import { AddCategory } from './AddCategory'
 import { Category } from './Category'
 
-export const Categories = () => {
+export const Categories = ({productsFiltered}) => {
   const [categories, setCategories] = useState([])
   const allCategories = async () => {
     try {
@@ -19,7 +19,7 @@ export const Categories = () => {
   }, [])
   return (
     <CategoriesCard>
-      {categories.map((category) => <Category key={category._id} category={category.name} />)}
+      {categories.map((category) => <Category key={category._id} category={category.name} onClick={productsFiltered(category._id)} />)}
       <AddCategory allCategories = {allCategories} />
     </CategoriesCard>
   )
