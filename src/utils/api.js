@@ -21,5 +21,12 @@ class Api {
       throw error
     }
   }
+  postCategory = async () => {
+    try {
+      await this.api.post('/category')
+    } catch (error) {
+      throw error
+    }
+  }
 }
 export default new Api()
