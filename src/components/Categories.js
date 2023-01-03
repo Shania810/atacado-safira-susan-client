@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { CategoriesCard } from '../design/styled.components'
 import Api from '../utils/api'
 import { Category } from './Category'
 
@@ -16,6 +17,8 @@ export const Categories = () => {
     allCategories()
   }, [])
   return (
-    categories.map((category) => <Category key={category._id} category={category.name} />)
+    <CategoriesCard>
+      {categories.map((category) => <Category key={category._id} category={category.name} />)}
+    </CategoriesCard>
   )
 }
