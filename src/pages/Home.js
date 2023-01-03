@@ -5,7 +5,7 @@ export const Home = () => {
   return (
     <div>
         <h1>Atacado Safira Susan</h1>
-        <button><Link to='/stock'>Stock</Link></button>
+        <button><Link to='/estoque'>Estoque</Link></button>
     </div>
   )
 }
