@@ -66,5 +66,13 @@ class Api {
       throw error
     }
   }
+  getOrder = async (idOrder) => {
+    try {
+      const { data } = await this.api.get(`/order/${idOrder}`)
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
 }
 export default new Api()
