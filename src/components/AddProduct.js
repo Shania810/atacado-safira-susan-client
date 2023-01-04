@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Api from '../utils/api'
 
 export const AddProduct = () => {
@@ -10,18 +11,20 @@ export const AddProduct = () => {
   const[retailPrice,setRetailPrice] = useState('')
   const[description,setDescription] = useState('')
 
+  const navigate = useNavigate()
   const newProduct = async(e) =>{
     e.preventDefault()
     const product = {
         name,
         category,
         stock,
-        wholesal_price: wholesalePrice,
+        wholesale_price: wholesalePrice,
         retail_price: retailPrice,
         description
     }
     try {
-      console.log(product)
+      await Api.postProduct(product)
+      navigate('/estoque')
     } catch (error) {
         console.log(error)
     }
