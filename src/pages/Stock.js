@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Categories } from '../components/Categories'
 import { Products } from '../components/Products'
 import Api from '../utils/api'
@@ -29,6 +30,7 @@ export const Stock = () => {
       <div>
         <Categories productsFiltered={productsFiltered} />
         <Products products={products} />
+        <button><Link to='/novoProduto'>Adicione Produto</Link></button>
       </div>
     </div>
   )
