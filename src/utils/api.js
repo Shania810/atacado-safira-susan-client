@@ -21,17 +21,24 @@ class Api {
       throw error
     }
   }
-  putProduct = async (idProduct, update) => {
-    try {
-      await this.api.put(`/product/${idProduct}`, update)
-    } catch (error) {
-      throw error
-    }
-  }
   getProductsFiltered = async (categoryId) => {
     try {
       const { data } = await this.api.get(`/productFiltered/${categoryId}`)
       return data
+    } catch (error) {
+      throw error
+    }
+  }
+  postProduct = async (newProduct) => {
+    try {
+      await this.api.post('/product', newProduct)
+    } catch (error) {
+      throw error
+    }
+  }
+  putProduct = async (idProduct, update) => {
+    try {
+      await this.api.put(`/product/${idProduct}`, update)
     } catch (error) {
       throw error
     }
