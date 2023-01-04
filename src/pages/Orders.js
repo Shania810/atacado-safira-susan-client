@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Api from '../utils/api'
-import {Order} from '../components/Order'
+import {OrderCard} from '../components/OrderCard'
 export const Orders = () => {
   const [orders,setOrders] = useState([])
   const allOrders = async() =>{
@@ -17,7 +17,7 @@ export const Orders = () => {
   return (
     <div>
       <h1>Pedidos</h1>
-      {orders.map((order)=> <Order/>)}
+      {orders.map((order,index)=> <OrderCard order={order} number={index}/>)}
     </div>
   )
 }
