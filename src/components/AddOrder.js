@@ -18,7 +18,8 @@ export const AddOrder = () => {
   const inputSearch = (e) =>{
     setSearch(e.target.value)
   }
-  const searchProduct = async(search)=>{
+  const searchProduct = async(e,search)=>{
+    e.preventDefault()
     try {
       const searchedProducts = await Api.getProductSearched(search)
       setProducts(searchedProducts)
