@@ -29,6 +29,14 @@ class Api {
       throw error
     }
   }
+  getProductSearched = async (value) => {
+    try {
+      const { data } = await this.api.get(`/product/search/${value}`)
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
   postProduct = async (newProduct) => {
     try {
       await this.api.post('/product', newProduct)
