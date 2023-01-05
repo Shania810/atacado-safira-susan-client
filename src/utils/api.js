@@ -86,7 +86,14 @@ class Api {
     try {
       await this.api.post('/order', newOrder)
     } catch (error) {
-      console.log(error)
+      throw error
+    }
+  }
+  putOrder = async (id, update) => {
+    try {
+      await this.api.put(`/order/${id}`, update)
+    } catch (error) {
+      throw error
     }
   }
 }

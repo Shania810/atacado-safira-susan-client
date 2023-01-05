@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import {Search} from './Search'
+import { Search } from './Search'
 import Api from '../utils/api'
 import { Order } from './Order'
 export const AddOrder = () => {
-  const [products,setProducts] = useState([])
-  const [search,setSearch] = useState('')
-  const [orderItems,setOrderItems] = useState([])
-  const allProducts = async() =>{
-    try {
-      const products = await Api.getProducts()
-      setProducts(products)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  useEffect(()=>{
-    allProducts()
-  },[])
-  const searchProduct = async(e,search)=>{
+  const [products, setProducts] = useState([])
+  const [search, setSearch] = useState('')
+  const [orderItems, setOrderItems] = useState([])
+  const searchProduct = async (e, search) => {
     setSearch(e.target.value)
     try {
       const searchedProducts = await Api.getProductSearched(search === '' ? false : search)
@@ -26,37 +15,84 @@ export const AddOrder = () => {
       console.log(error)
     }
   }
-  const addOrderItem = (product) =>{
-   const validate = orderItems.filter((orderItem)=> orderItem.name === product.name )
-   if(validate.length >= 2){
-    console.log('já existe')
-    }else{
-      setOrderItems([...orderItems,product])
+  useEffect(()=>{
+    const searchProduct = async () => {
+      try {
+        const searchedProducts = await Api.getProductSearched(search === '' ? false : search)
+        setProducts(searchedProducts)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    searchProduct()
+  },[search])
+  /*const addOrderItem = (product) => {
+    const validate = orderItems.filter((orderItem) => orderItem.name === product.name)
+    if (validate.length >= 1) {
+      console.log('já existe')
+    } else {
+      setOrderItems([...orderItems, { ...product, quantity: 1, total: product.retail_price }])
     }
   }
+  useEffect(() => {
+    const updateOrder = () => {
+      const orderItemsTotal = orderItems.map(({ quantity, wholesale_price, retail_price }) => quantity <= 6 ? quantity * retail_price : quantity * wholesale_price)
+      const total = orderItemsTotal?.reduce((cu, acc) => cu + acc, 0)
+      orderItems.total = total
+    }
+    updateOrder()
+  }, [orderItems])*/
+  useEffect(()=>{
+    const addOrder = async()=>{
+      const order = {
+        orderItems: [],
+        seller: 'Atacado Safira Susan'
+      }
+      try {
+        const newOrder = await Api.postOrder(order)
+        setOrderItems(newOrder.order_items)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    addOrder()
+  },[])
   return (
     <div>
-     <Search search={search} searchProduct={searchProduct}/>
-      {products?.map((product)=>{
-        return <div key={product._id} onClick={()=>addOrderItem(product)}>
+      <Search search={search} searchProduct={searchProduct} />
+      {products?.map((product) => {
+        return <div key={product._id}>
           <div>{product.name}</div>
           <div>{product.stock}</div>
           <div>{product.category.name}</div>
         </div>
       })}
-      <table>
-      <thead>
-        <td>
-          <tr>Item</tr>
-          <tr>Produto</tr>
-          <tr>Quantidade</tr>
-          <tr>Preço</tr>
-        </td>
-      </thead>
-      <tbody>
-      {orderItems.map((orderItem)=> <Order orderItem={orderItem} /> )}
-      </tbody>
-      </table>
+      {orderItems.length !== 0 &&
+        <div><table>
+          <thead>
+            <tr>
+              <td>Item</td>
+              <td>Produto</td>
+              <td>Quantidade</td>
+              <td>Preço</td>
+              <td>Total</td>
+            </tr>
+          </thead>
+          <tbody>
+            {orderItems.map((orderItem, item) => <Order key={orderItem._id} item={item} orderItem={orderItem} />)}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{orderItems?.total}</td>
+            </tr>
+          </tfoot>
+        </table>
+          <button>Salvar Venda</button>
+        </div>}
     </div>
   )
 }
