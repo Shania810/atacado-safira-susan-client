@@ -74,5 +74,12 @@ class Api {
       throw error
     }
   }
+  postOrder = async (newOrder) => {
+    try {
+      await this.api.post('/order', newOrder)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 export default new Api()
