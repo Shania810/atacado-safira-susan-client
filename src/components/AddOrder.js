@@ -15,13 +15,10 @@ export const AddOrder = () => {
   useEffect(()=>{
     allProducts()
   },[])
-  const inputSearch = (e) =>{
-    setSearch(e.target.value)
-  }
   const searchProduct = async(e,search)=>{
-    e.preventDefault()
+    setSearch(e.target.value)
     try {
-      const searchedProducts = await Api.getProductSearched(search)
+      const searchedProducts = await Api.getProductSearched(search === '' ? false : search)
       setProducts(searchedProducts)
     } catch (error) {
       console.log(error)
@@ -29,14 +26,14 @@ export const AddOrder = () => {
   }
   return (
     <div>
+     <Search search={search} searchProduct={searchProduct}/>
       {products?.map((product)=>{
-        return <div>
+        return <div key={product._id} >
           <div>{product.name}</div>
           <div>{product.stock}</div>
           <div>{product.category.name}</div>
         </div>
       })}
-      <Search search={search} searchProduct={searchProduct} inputSearch={inputSearch} />
     </div>
   )
 }

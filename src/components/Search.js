@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Search = ({search,searchProduct,inputSearch}) => {
+export const Search = ({search,searchProduct}) => {
   return (
-    <form onSumit={searchProduct}>
-      <input type='text' value={search} onChange={inputSearch} />
-    </form>
+    <div>
+      <input type='text' value={search} onChange={(e)=> searchProduct(e,search)} />
+    </div>
   )
 }
