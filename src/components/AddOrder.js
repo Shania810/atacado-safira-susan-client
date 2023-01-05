@@ -1,7 +1,27 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
+import Api from '../utils/api'
 export const AddOrder = () => {
+  const [products,setProducts] = useState([])
+  const allProducts = async() =>{
+    try {
+      const products = await Api.getProducts()
+      setProducts(products)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(()=>{
+    allProducts()
+  },[])
   return (
-    <div>AddOrder</div>
+    <div>
+      {products?.map((product)=>{
+        return <div>
+          <div>{product.name}</div>
+          <div>{product.stock}</div>
+          <div>{product.category.name}</div>
+        </div>
+      })}
+    </div>
   )
 }
