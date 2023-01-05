@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import {Search} from './Search'
 import Api from '../utils/api'
 export const AddOrder = () => {
   const [products,setProducts] = useState([])
@@ -14,6 +15,9 @@ export const AddOrder = () => {
   useEffect(()=>{
     allProducts()
   },[])
+  const inputSearch = (e) =>{
+    setSearch(e.target.value)
+  }
   const searchProduct = async(search)=>{
     try {
       const searchedProducts = await Api.getProductSearched(search)
@@ -31,6 +35,7 @@ export const AddOrder = () => {
           <div>{product.category.name}</div>
         </div>
       })}
+      <Search search={search} searchProduct={searchProduct} inputSearch={inputSearch} />
     </div>
   )
 }
