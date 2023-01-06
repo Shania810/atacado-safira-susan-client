@@ -22,8 +22,8 @@ export const Order = () => {
        <table>
        <thead>
        <tr>
-            <td></td>
             <td>Item</td>
+            <td>Produto</td>
             <td>Preço</td>
             <td>Quantidade</td>
             <td>Total</td>
