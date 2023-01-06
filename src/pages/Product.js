@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Api from '../utils/api'
 
 export const Product = () => {
@@ -19,6 +19,8 @@ export const Product = () => {
   const [showInputWholesalePrice, setShowInputWholesalePrice] = useState(false)
   const [showInputStock, setShowInputStock] = useState(false)
   const [showInputDescription, setShowInputDescription] = useState(false)
+  
+  const navigate = useNavigate()
 
   const getProduct = async (idProduct) => {
     try {
@@ -50,6 +52,14 @@ export const Product = () => {
       setShowInputWholesalePrice(false)
       setShowInputStock(false)
       setShowInputDescription(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const deleteProduct = async(idProduct)=>{
+    try {
+      await Api.deleteProduct(idProduct)
+      navigate('/estoque')
     } catch (error) {
       console.log(error)
     }
@@ -112,6 +122,7 @@ export const Product = () => {
       </div>
 
       {(showInputName || showInputCategory || showInputRetailPrice || showInputWholesalePrice || showInputStock || showInputDescription) && <button type='submit' onClick={() => updateProduct(product)}>Salvar Alterações</button>}
+      <button onClick={()=> deleteProduct(product._id)} >Excluir Produto</button>
     </div>
   )
 }
