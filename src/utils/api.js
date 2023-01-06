@@ -58,6 +58,13 @@ class Api {
       throw error
     }
   }
+  deleteProduct = async (idProduct) => {
+    try {
+      await this.api.delete(`/product/${idProduct}`)
+    } catch (error) {
+      throw error
+    }
+  }
   getCategories = async () => {
     try {
       const { data } = await this.api.get('/category')
