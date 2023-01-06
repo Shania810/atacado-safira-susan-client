@@ -21,9 +21,9 @@ class Api {
       throw error
     }
   }
-  getProductsFiltered = async (categoryId) => {
+  getProductsFiltered = async (idCategory) => {
     try {
-      const { data } = await this.api.get(`/productFiltered/${categoryId}`)
+      const { data } = await this.api.get(`/productFiltered/${idCategory}`)
       return data
     } catch (error) {
       throw error
@@ -53,7 +53,7 @@ class Api {
   }
   putProductsStock = async (idOrder) => {
     try {
-      await this.api.put(`product/order/${idOrder}`)
+      await this.api.put(`product/stock/${idOrder}`)
     } catch (error) {
       throw error
     }
@@ -66,9 +66,9 @@ class Api {
       throw error
     }
   }
-  postCategory = async (object) => {
+  postCategory = async (newCategory) => {
     try {
-      await this.api.post('/category', object)
+      await this.api.post('/category', newCategory)
     } catch (error) {
       throw error
     }
@@ -91,14 +91,22 @@ class Api {
   }
   postOrder = async (newOrder) => {
     try {
-      await this.api.post('/order', newOrder)
+      const { data } = await this.api.post('/order', newOrder)
+      return data
     } catch (error) {
       throw error
     }
   }
-  putOrder = async (id, update) => {
+  putOrder = async (idOrder, update) => {
     try {
-      await this.api.put(`/order/${id}`, update)
+      await this.api.put(`/order/${idOrder}`, update)
+    } catch (error) {
+      throw error
+    }
+  }
+  deleteOrder = async (idOrder) => {
+    try {
+      await this.api.delete(`/order/${idOrder}`)
     } catch (error) {
       throw error
     }

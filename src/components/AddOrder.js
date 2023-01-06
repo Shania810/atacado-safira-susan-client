@@ -7,12 +7,12 @@ export const AddOrder = () => {
   const [products, setProducts] = useState([])
   const [search, setSearch] = useState('')
   const [orderItems, setOrderItems] = useState([])
-  const [total,setTotal] = useState(0)
+  const [total, setTotal] = useState(0)
   const navigate = useNavigate()
   const changeInputSearch = async (e) => {
     setSearch(e.target.value)
   }
-  useEffect(()=>{
+  useEffect(() => {
     const searchProduct = async () => {
       try {
         const searchedProducts = await Api.getProductSearched(search === '' ? false : search)
@@ -22,7 +22,7 @@ export const AddOrder = () => {
       }
     }
     searchProduct()
-  },[search])
+  }, [search])
   const addOrderItem = (product) => {
     const validate = orderItems.filter((orderItem) => orderItem.name === product.name)
     if (validate.length >= 1) {
@@ -33,10 +33,10 @@ export const AddOrder = () => {
   }
   useEffect(() => {
     const updateOrder = () => {
-        orderItems.forEach(orderItem => {
-        if(orderItem.quantity <= 6){
+      orderItems.forEach(orderItem => {
+        if (orderItem.quantity <= 6) {
           orderItem.total = orderItem.quantity * orderItem.retail_price
-        }else{
+        } else {
           orderItem.total = orderItem.quantity * orderItem.wholesale_price
         }
       });
@@ -46,23 +46,24 @@ export const AddOrder = () => {
     }
     updateOrder()
   }, [orderItems])
-    const addOrder = async()=>{
-      const order = {
-        orderItems: orderItems.map(({_id,quantity})=>{return {...{product: _id},quantity: quantity}}),
-        seller: 'Atacado Safira Susan'
-      }
-      try {
-        await Api.postOrder(order)
-        navigate('/pedidos')
-      } catch (error) {
-        console.log(error)
-      }
+  const addOrder = async () => {
+    const order = {
+      orderItems: orderItems.map(({ _id, quantity }) => { return { ...{ product: _id }, quantity: quantity } }),
+      seller: 'Atacado Safira Susan'
     }
+    try {
+      const newOrder = await Api.postOrder(order)
+      await Api.putProductsStock(newOrder._id)
+      navigate('/pedidos')
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div>
       <Search search={search} changeInputSearch={changeInputSearch} />
       {products?.map((product) => {
-        return <div key={product._id} onClick={()=>addOrderItem(product)}>
+        return <div key={product._id} onClick={() => addOrderItem(product)}>
           <div>{product.name}</div>
           <div>{product.stock}</div>
           <div>{product.category.name}</div>
