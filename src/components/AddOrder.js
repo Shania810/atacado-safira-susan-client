@@ -31,16 +31,28 @@ export const AddOrder = () => {
       setOrderItems([...orderItems, { ...product, quantity: 1, total: product.retail_price }])
     }
   }
+  const updateOrder = () => {
+    orderItems.forEach(orderItem => {
+      if (orderItem.quantity < 6) {
+        orderItem.total = orderItem.quantity * orderItem.retail_price
+      } else {
+        orderItem.total = orderItem.quantity * orderItem.wholesale_price
+      }
+    });
+    const orderItemsTotal = orderItems.map(({ quantity, wholesale_price, retail_price }) => quantity < 6 ? quantity * retail_price : quantity * wholesale_price)
+    const total = orderItemsTotal?.reduce((cu, acc) => cu + acc, 0)
+    setTotal(total)
+  }
   useEffect(() => {
     const updateOrder = () => {
       orderItems.forEach(orderItem => {
-        if (orderItem.quantity <= 6) {
+        if (orderItem.quantity < 6) {
           orderItem.total = orderItem.quantity * orderItem.retail_price
         } else {
           orderItem.total = orderItem.quantity * orderItem.wholesale_price
         }
       });
-      const orderItemsTotal = orderItems.map(({ quantity, wholesale_price, retail_price }) => quantity <= 6 ? quantity * retail_price : quantity * wholesale_price)
+      const orderItemsTotal = orderItems.map(({ quantity, wholesale_price, retail_price }) => quantity < 6 ? quantity * retail_price : quantity * wholesale_price)
       const total = orderItemsTotal?.reduce((cu, acc) => cu + acc, 0)
       setTotal(total)
     }
@@ -81,7 +93,7 @@ export const AddOrder = () => {
             </tr>
           </thead>
           <tbody>
-            {orderItems.map((orderItem, item) => <Order key={orderItem._id} item={item} orderItem={orderItem} />)}
+            {orderItems.map((orderItem, item) => <Order key={orderItem._id} item={item} orderItem={orderItem} updateOrder={updateOrder} />)}
           </tbody>
           <tfoot>
             <tr>
