@@ -6,14 +6,9 @@ export const AddOrder = () => {
   const [products, setProducts] = useState([])
   const [search, setSearch] = useState('')
   const [orderItems, setOrderItems] = useState([])
-  const searchProduct = async (e, search) => {
+  const [total,setTotal] = useState(0)
+  const changeInputSearch = async (e) => {
     setSearch(e.target.value)
-    try {
-      const searchedProducts = await Api.getProductSearched(search === '' ? false : search)
-      setProducts(searchedProducts)
-    } catch (error) {
-      console.log(error)
-    }
   }
   useEffect(()=>{
     const searchProduct = async () => {
@@ -26,7 +21,7 @@ export const AddOrder = () => {
     }
     searchProduct()
   },[search])
-  /*const addOrderItem = (product) => {
+  const addOrderItem = (product) => {
     const validate = orderItems.filter((orderItem) => orderItem.name === product.name)
     if (validate.length >= 1) {
       console.log('já existe')
@@ -36,32 +31,35 @@ export const AddOrder = () => {
   }
   useEffect(() => {
     const updateOrder = () => {
+        orderItems.forEach(orderItem => {
+        if(orderItem.quantity <= 6){
+          orderItem.total = orderItem.quantity * orderItem.retail_price
+        }else{
+          orderItem.total = orderItem.quantity * orderItem.wholesale_price
+        }
+      });
       const orderItemsTotal = orderItems.map(({ quantity, wholesale_price, retail_price }) => quantity <= 6 ? quantity * retail_price : quantity * wholesale_price)
       const total = orderItemsTotal?.reduce((cu, acc) => cu + acc, 0)
-      orderItems.total = total
+      setTotal(total)
     }
     updateOrder()
-  }, [orderItems])*/
-  useEffect(()=>{
+  }, [orderItems])
     const addOrder = async()=>{
       const order = {
-        orderItems: [],
+        orderItems: orderItems.map(({_id,quantity})=>{return {...{product: _id},quantity: quantity}}),
         seller: 'Atacado Safira Susan'
       }
       try {
-        const newOrder = await Api.postOrder(order)
-        setOrderItems(newOrder.order_items)
+        await Api.postOrder(order)
       } catch (error) {
         console.log(error)
       }
     }
-    addOrder()
-  },[])
   return (
     <div>
-      <Search search={search} searchProduct={searchProduct} />
+      <Search search={search} changeInputSearch={changeInputSearch} />
       {products?.map((product) => {
-        return <div key={product._id}>
+        return <div key={product._id} onClick={()=>addOrderItem(product)}>
           <div>{product.name}</div>
           <div>{product.stock}</div>
           <div>{product.category.name}</div>
@@ -87,11 +85,11 @@ export const AddOrder = () => {
               <td></td>
               <td></td>
               <td></td>
-              <td>{orderItems?.total}</td>
+              <td>{total}</td>
             </tr>
           </tfoot>
         </table>
-          <button>Salvar Venda</button>
+          <button onClick={addOrder}>Salvar Venda</button>
         </div>}
     </div>
   )
