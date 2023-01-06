@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { PrintComponent } from '../components/PrintComponent'
 import Api from '../utils/api'
 export const Order = () => {
   const {id} = useParams() 
@@ -48,6 +49,7 @@ export const Order = () => {
         </tr>
         </tbody>
        </table>
+       <PrintComponent order={order} />
     </div>
   )
 }
