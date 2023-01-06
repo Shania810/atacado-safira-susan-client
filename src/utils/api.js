@@ -51,6 +51,13 @@ class Api {
       throw error
     }
   }
+  putProductsStock = async (idOrder) => {
+    try {
+      await this.api.put(`product/order/${idOrder}`)
+    } catch (error) {
+      throw error
+    }
+  }
   getCategories = async () => {
     try {
       const { data } = await this.api.get('/category')
