@@ -5,6 +5,7 @@ import Api from '../utils/api'
 export const Order = () => {
   const {id} = useParams() 
   const [order,setOrder] = useState({})
+  
   const getOrder = async(id) =>{
     try {
         const order = await Api.getOrder(id)
@@ -35,8 +36,8 @@ export const Order = () => {
           return <tr key={item._id} >
             <td>{index + 1}</td>
             <td>{item.product.name}</td>
-            <td>{item.quantity <= 6 ? item.product.retail_price : item.product.wholesale_price }</td>
-            <td>{item.quantity}</td>
+            <td>{item.quantity < 6 ? item.product.retail_price : item.product.wholesale_price }</td>
+            <td>{item.quantity}</td> 
             <td>{item.total}</td>
           </tr>
         })}

@@ -18,7 +18,7 @@ export const Orders = () => {
   return (
     <div>
       <h1>Pedidos</h1>
-      {orders.map((order,index)=> <OrderCard order={order} number={index}/>)}
+      {orders.map((order,index,items)=> <OrderCard key={order._id} order={order} number={index} items={items}/>)}
       <button><Link to='/novoPedido'>Nova venda</Link></button>
     </div>
   )

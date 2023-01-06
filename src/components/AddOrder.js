@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Search } from './Search'
 import Api from '../utils/api'
 import { Order } from './Order'
+import { useNavigate } from 'react-router-dom'
 export const AddOrder = () => {
   const [products, setProducts] = useState([])
   const [search, setSearch] = useState('')
   const [orderItems, setOrderItems] = useState([])
   const [total,setTotal] = useState(0)
+  const navigate = useNavigate()
   const changeInputSearch = async (e) => {
     setSearch(e.target.value)
   }
@@ -51,6 +53,7 @@ export const AddOrder = () => {
       }
       try {
         await Api.postOrder(order)
+        navigate('/pedidos')
       } catch (error) {
         console.log(error)
       }

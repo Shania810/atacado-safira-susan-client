@@ -21,7 +21,7 @@ export const Print = React.forwardRef(({ order }, ref) => {
             return <tr key={item._id} >
               <td>{index + 1}</td>
               <td>{item.product.name}</td>
-              <td>{item.quantity <= 6 ? item.product.retail_price : item.product.wholesale_price}</td>
+              <td>{item.quantity < 6 ? item.product.retail_price : item.product.wholesale_price}</td>
               <td>{item.quantity}</td>
               <td>{item.total}</td>
             </tr>
