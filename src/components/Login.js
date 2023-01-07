@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Login = () => {
+export const LogIn = () => {
   return (
     <div>Login</div>
   )
