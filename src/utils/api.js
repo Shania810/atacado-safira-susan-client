@@ -4,6 +4,27 @@ class Api {
     this.api = axios.create({
       baseURL: 'http://localhost:4000/'
     })
+    this.api.interceptors.request.use(
+      (config) => {
+        const token = localStorage.getItem('token')
+        if (token) {
+          config.headers = {
+            Authorization: `Bearer ${token}`
+          }
+        }
+        return token
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  }
+  signUp = async (newUser) => {
+    try {
+      await this.api.post('/signup', newUser)
+    } catch (error) {
+      throw error
+    }
   }
   getProducts = async () => {
     try {
