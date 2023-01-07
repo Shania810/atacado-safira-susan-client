@@ -7,6 +7,7 @@ import { Stock } from './pages/Stock';
 import { Orders } from './pages/Orders';
 import { Order } from './pages/Order';
 import { NewOrder } from './pages/NewOrder';
+import { Sellers } from './pages/Sellers';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/pedidos' element={<Orders />} />
         <Route path='/pedido/:id' element={<Order />} />
         <Route path='/novoPedido' element={<NewOrder />} />
+        <Route path='/vendedores' element={<Sellers />} />
       </Routes>
     </div>
   );
