@@ -26,6 +26,13 @@ class Api {
       throw error
     }
   }
+  logIn = async (loginInfo) => {
+    try {
+      await this.api.post('/login', loginInfo)
+    } catch (error) {
+      throw error
+    }
+  }
   getProducts = async () => {
     try {
       const { data } = await this.api.get('/product')
