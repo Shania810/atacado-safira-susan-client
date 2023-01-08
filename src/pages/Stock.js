@@ -33,7 +33,7 @@ export const Stock = () => {
     <div>
       <h1>Estoque</h1>
       <div>
-        <Categories productsFiltered={productsFiltered} user={user} />
+        <Categories productsFiltered={productsFiltered} user={typeUser} />
         <Products products={products} />
         {typeUser === 'admin' && <button><Link to='/novoProduto'>Adicione Produto</Link></button>}
       </div>
