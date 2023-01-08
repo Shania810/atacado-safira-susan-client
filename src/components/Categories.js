@@ -4,7 +4,7 @@ import Api from '../utils/api'
 import { AddCategory } from './AddCategory'
 import { Category } from './Category'
 
-export const Categories = ({productsFiltered}) => {
+export const Categories = ({productsFiltered,user}) => {
   const [categories, setCategories] = useState([])
   const allCategories = async () => {
     try {
@@ -20,7 +20,7 @@ export const Categories = ({productsFiltered}) => {
   return (
     <CategoriesCard>
       {categories.map((category) => <Category key={category._id} category={category} productsFiltered={productsFiltered}/>)}
-      <AddCategory allCategories = {allCategories} />
+      {user === 'admin' && <AddCategory allCategories = {allCategories} />}
     </CategoriesCard>
   )
 }
