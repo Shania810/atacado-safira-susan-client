@@ -156,5 +156,21 @@ class Api {
       throw error
     }
   }
+  getSellers = async () => {
+    try {
+      const { data } = await this.api.get('/seller')
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
+  getSeller = async (idSeller) => {
+    try {
+      const { data } = await this.api.get(`/seller/${idSeller}`)
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
 }
 export default new Api()
