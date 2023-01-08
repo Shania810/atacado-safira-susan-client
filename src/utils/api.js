@@ -13,7 +13,7 @@ class Api {
             Authorization: `Bearer ${token}`
           }
         }
-        return token
+        return config
       },
       (error) => {
         console.log(error)
@@ -22,8 +22,8 @@ class Api {
 
     this.api.interceptors.response.use(
       (response) => response,
-      (error) =>{
-        console.log(error)
+      (error) => {
+        throw error
       }
     )
   }

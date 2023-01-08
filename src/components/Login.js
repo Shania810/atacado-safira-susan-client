@@ -16,13 +16,14 @@ export const LogIn = () => {
     }
     try {
       await Api.logIn(user)
-      navigate('/pedidos')
+      navigate('/estoque')
     } catch (error) {
       console.log(error)
     }
   }
   return (
     <form onSubmit={(e) => verifyUser(e)} >
+     <h1>Logar conta</h1>
       <div>
         <label>Nome de usuário</label>
         <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
