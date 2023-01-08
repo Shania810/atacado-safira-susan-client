@@ -17,7 +17,7 @@ export const Seller = () => {
     }
     getSeller(id)
   },[id])
-  console.log(seller)
+
   return (
     <div>
       <h1>Vendedor(a){seller.name}</h1>
