@@ -3,6 +3,7 @@ import { Search } from '../components/Search'
 import { NoUser } from './NoUser'
 import { NoAuthorization } from './NoAuthorization'
 import Api from '../utils/api'
+import { Link } from 'react-router-dom'
 
 export const Clients = () => {
     const user = localStorage.getItem('token')
@@ -34,6 +35,7 @@ export const Clients = () => {
                     {clients.map((client) => {
                         return <div>
                             <div>{client.name}</div>
+                            <button><Link to={`/cliente/${client._id}`}>Veja mais detalhes</Link></button>
                         </div>
                     })}
                 </div>

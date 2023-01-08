@@ -6,12 +6,12 @@ import Api from '../utils/api'
 
 export const Client = () => {
   const user = localStorage.getItem('token')
-  const typeUser =localStorage.getItem('role')
-  const {id} = useParams()
-  const [client,setClient] = useState({})
+  const typeUser = localStorage.getItem('role')
+  const { id } = useParams()
+  const [client, setClient] = useState({})
 
-  useEffect(()=>{
-    const getClient = async()=>{
+  useEffect(() => {
+    const getClient = async () => {
       try {
         const client = await Api.getClient(id)
         setClient(client)
@@ -20,19 +20,19 @@ export const Client = () => {
       }
     }
     getClient()
-  },[id])
+  }, [id])
 
-  if(user){
-    if(typeUser === 'admin'){
-  return (
-    <div>
-      <h1>Cliente {client.name}</h1>
-    </div>
-  )
-    }else{
-      return <NoAuthorization/>
+  if (user) {
+    if (typeUser === 'admin') {
+      return (
+        <div>
+          <h1>Cliente {client.name}</h1>
+        </div>
+      )
+    } else {
+      return <NoAuthorization />
     }
-  }else{
-    return <NoUser/>
+  } else {
+    return <NoUser />
   }
 }
