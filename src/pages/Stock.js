@@ -28,7 +28,7 @@ export const Stock = () => {
       console.log(error)
     }
   }
-  if(!user){
+  if(user){
   return (
     <div>
       <h1>Estoque</h1>
