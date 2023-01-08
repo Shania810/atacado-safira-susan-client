@@ -3,10 +3,10 @@ const { createContext } = require("react");
 const UserContext = createContext()
 
 const UserProviderWrapper = (props) => {
-    const user = localStorage.getItem('user')
+    const role = localStorage.getItem('role')
 
     return (
-        <UserContext.Provider value={user} >
+        <UserContext.Provider value={role} >
             {props.children}
         </UserContext.Provider>
     )
