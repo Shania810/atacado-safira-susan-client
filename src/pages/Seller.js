@@ -22,17 +22,21 @@ export const Seller = () => {
     getSeller(id)
   }, [id])
   if (user) {
-    return (
-      <div>
-        <h1>Vendedor(a){seller.name}</h1>
-        {seller?.orders?.map((order) => {
-          return <div key={order._id} >
-            <h2>{order.seller.name}</h2>
-          </div>
-        })}
-      </div>
-    )
+    if (typeUser === 'admin') {
+      return (
+        <div>
+          <h1>Vendedor(a){seller.name}</h1>
+          {seller?.orders?.map((order) => {
+            return <div key={order._id} >
+              <h2>{order.seller.name}</h2>
+            </div>
+          })}
+        </div>
+      )
+    } else {
+      return <NoAuthorization />
+    }
   } else {
-    return !typeUser === 'admin' ? <NoAuthorization/> : <NoUser/>
+    return <NoUser />
   }
 }
