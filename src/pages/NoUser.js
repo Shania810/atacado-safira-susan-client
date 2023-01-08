@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const NotUser = () => {
+export const NoUser = () => {
   return (
     <div>
     <h1>Não autorizado</h1>

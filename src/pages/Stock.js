@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Categories } from '../components/Categories'
 import { Products } from '../components/Products'
+import {NoUser} from './NoUser'
 import Api from '../utils/api'
 
 export const Stock = () => {
@@ -39,9 +40,6 @@ export const Stock = () => {
     </div>
   )
   }else{
-    <div>
-      <h1>Não autorizado</h1>
-      <h2>Cria uma conta ou acesse sua conta</h2>
-    </div>
+    return <NoUser/>
   }
 }
