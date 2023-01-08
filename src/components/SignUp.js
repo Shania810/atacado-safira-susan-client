@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Api from '../utils/api'
 
 export const SignUp = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
+
+  const navigate = useNavigate()
 
   const newUser = async (e) => {
     e.preventDefault()
@@ -13,6 +16,7 @@ export const SignUp = () => {
     }
     try {
       await Api.signUp(user)
+      navigate('/estoque')
     } catch (error) {
       console.log(error)
     }
