@@ -8,6 +8,7 @@ import { Orders } from './pages/Orders';
 import { Order } from './pages/Order';
 import { NewOrder } from './pages/NewOrder';
 import { Sellers } from './pages/Sellers';
+import { Seller } from './pages/Seller';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/pedido/:id' element={<Order />} />
         <Route path='/novoPedido' element={<NewOrder />} />
         <Route path='/vendedores' element={<Sellers />} />
+        <Route path='/vendedor/:id' element={<Seller />} />
       </Routes>
     </div>
   );
