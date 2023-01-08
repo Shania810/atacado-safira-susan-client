@@ -4,6 +4,7 @@ class Api {
     this.api = axios.create({
       baseURL: 'http://localhost:4000/'
     })
+
     this.api.interceptors.request.use(
       (config) => {
         const token = localStorage.getItem('token')
@@ -18,7 +19,15 @@ class Api {
         console.log(error)
       }
     )
+
+    this.api.interceptors.response.use(
+      (response) => response,
+      (error) =>{
+        console.log(error)
+      }
+    )
   }
+
   signUp = async (newUser) => {
     try {
       await this.api.post('/signup', newUser)
@@ -28,7 +37,8 @@ class Api {
   }
   logIn = async (loginInfo) => {
     try {
-      await this.api.post('/login', loginInfo)
+      const { data } = await this.api.post('/login', loginInfo)
+      localStorage.setItem('token', data.token)
     } catch (error) {
       throw error
     }
