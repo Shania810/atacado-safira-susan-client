@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Api from '../utils/api'
+import { NoUser } from './NoUser'
 
 export const Product = () => {
+  const user = localStorage.getItem('token')
+  const typeUser = localStorage.getItem('role')
   const { id } = useParams()
   const [categories, setCategories] = useState([])
   const [product, setProduct] = useState({})
@@ -75,6 +78,8 @@ export const Product = () => {
     }
     allCategories()
   }, [])
+
+  if(user){
   return (
     <div>
 
@@ -122,7 +127,10 @@ export const Product = () => {
       </div>
 
       {(showInputName || showInputCategory || showInputRetailPrice || showInputWholesalePrice || showInputStock || showInputDescription) && <button type='submit' onClick={() => updateProduct(product)}>Salvar Alterações</button>}
-      <button onClick={()=> deleteProduct(product._id)} >Excluir Produto</button>
+      {typeUser === 'admin' && <button onClick={()=> deleteProduct(product._id)} >Excluir Produto</button>}
     </div>
   )
+  }else{
+    return <NoUser/>
+  }
 }

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Api from '../utils/api'
+import { NoAuthorization } from './NoAuthorization'
+import { NoUser } from './NoUser'
 
 export const Sellers = () => {
+  const user = localStorage.getItem('token')
+  const typeUser = localStorage.getItem('role')
   const [sellers,setSellers] = useState([])
   useEffect(()=>{
     const allSellers = async()=>{
@@ -15,7 +19,8 @@ export const Sellers = () => {
     }
     allSellers()
   },[])
-  console.log(sellers)
+
+  if(user){
   return (
     <div>
       <h1>Vendedores</h1>
@@ -27,4 +32,7 @@ export const Sellers = () => {
       })}
     </div>
   )
+    }else{
+      return !typeUser === 'admin' ? <NoAuthorization/> : <NoUser/>
+    }
 }
