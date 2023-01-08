@@ -39,7 +39,7 @@ class Api {
     try {
       const { data } = await this.api.post('/login', loginInfo)
       localStorage.setItem('token', data.token)
-      localStorage.setItem('role',data.role)
+      localStorage.setItem('role', data.role)
     } catch (error) {
       throw error
     }
@@ -169,6 +169,51 @@ class Api {
     try {
       const { data } = await this.api.get(`/seller/${idSeller}`)
       return data
+    } catch (error) {
+      throw error
+    }
+  }
+  getClients = async () => {
+    try {
+      const { data } = await this.api.get('/client')
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
+  getClient = async (idClient) => {
+    try {
+      const { data } = await this.api.get(`/client/${idClient}`)
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
+  getSearchedClients = async (value) => {
+    try {
+      const { data } = await this.api.get(`/client/search/${value}`)
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
+  postClient = async (newClient) => {
+    try {
+      await this.api.post('/client', newClient)
+    } catch (error) {
+      throw error
+    }
+  }
+  putClient = async (idClient, update) => {
+    try {
+      await this.api.put(`/client/${idClient}`, update)
+    } catch (error) {
+      throw error
+    }
+  }
+  deleteClient = async (idClient) => {
+    try {
+      await this.api.delete(`/client/${idClient}`)
     } catch (error) {
       throw error
     }
