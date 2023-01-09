@@ -1,11 +1,13 @@
 import React from 'react'
 
 export const Print = React.forwardRef(({ order }, ref) => {
-  const { order_items, seller, total } = order
+  const { orderItems, seller, client,total,payment } = order
   return (
     <div ref={ref} >
       <h1>Atacado Safira Susan</h1>
       <h2>Vendedor(a) {seller}</h2>
+      <div>Cliente: {client}</div>
+        <div>Pagamento: {payment}</div>
       <table>
         <thead>
           <tr>
@@ -17,7 +19,7 @@ export const Print = React.forwardRef(({ order }, ref) => {
           </tr>
         </thead>
         <tbody>
-          {order_items?.map((item, index) => {
+          {orderItems?.map((item, index) => {
             return <tr key={item._id} >
               <td>{index + 1}</td>
               <td>{item.product.name}</td>

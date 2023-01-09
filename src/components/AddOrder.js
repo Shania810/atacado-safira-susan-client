@@ -5,13 +5,24 @@ import { Order } from './Order'
 import { useNavigate } from 'react-router-dom'
 export const AddOrder = () => {
   const [products, setProducts] = useState([])
-  const [search, setSearch] = useState('')
+  const [clients,setClients] = useState([])
   const [orderItems, setOrderItems] = useState([])
+
+  const [search, setSearch] = useState('')
+  const [searchClient,setSearchClient] = useState('')
+  
   const [total, setTotal] = useState(0)
+  const [payment,setPayment] = useState('')
+  const [client,setClient] = useState('')
+
+  const [value,setValue] = useState(false)
+
   const navigate = useNavigate()
   const changeInputSearch = async (e) => {
     setSearch(e.target.value)
   }
+
+
   useEffect(() => {
     const searchProduct = async () => {
       try {
@@ -23,6 +34,7 @@ export const AddOrder = () => {
     }
     searchProduct()
   }, [search])
+
   const addOrderItem = (product) => {
     const validate = orderItems.filter((orderItem) => orderItem.name === product.name)
     if (validate.length >= 1) {
@@ -31,6 +43,7 @@ export const AddOrder = () => {
       setOrderItems([...orderItems, { ...product, quantity: 1, total: product.retail_price }])
     }
   }
+
   const updateOrder = () => {
     orderItems.forEach(orderItem => {
       if (orderItem.quantity < 6) {
@@ -43,6 +56,7 @@ export const AddOrder = () => {
     const total = orderItemsTotal?.reduce((cu, acc) => cu + acc, 0)
     setTotal(total)
   }
+
   useEffect(() => {
     const updateOrder = () => {
       orderItems.forEach(orderItem => {
@@ -58,10 +72,12 @@ export const AddOrder = () => {
     }
     updateOrder()
   }, [orderItems])
+
   const addOrder = async () => {
     const order = {
       orderItems: orderItems.map(({ _id, quantity }) => { return { ...{ product: _id }, quantity: quantity } }),
-      seller: 'Atacado Safira Susan'
+      payment,
+      client
     }
     try {
       const newOrder = await Api.postOrder(order)
@@ -71,6 +87,23 @@ export const AddOrder = () => {
       console.log(error)
     }
   }
+
+  const changeInputSearchClient = (e) =>{
+     setSearchClient(e.target.value)
+  }
+  useEffect(()=>{
+    const searchClients = async()=>{
+      try {
+        const searchedClients = await Api.getSearchedClients(searchClient === '' ? false : searchClient )
+        setClients(searchedClients)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    searchClients()
+  },[searchClient])
+  
+
   return (
     <div>
       <Search search={search} changeInputSearch={changeInputSearch} />
@@ -105,6 +138,24 @@ export const AddOrder = () => {
             </tr>
           </tfoot>
         </table>
+        <div>
+          <label><b>Forma de pagamento</b></label>
+          <button onClick={()=> setPayment('dinheiro')} >Dinheiro</button>
+          <button onClick={()=> setPayment('cartão')} >Cartão</button>
+          <button onClick={()=> setPayment('dívida')} >Dívida</button>
+          <button onClick={()=> setPayment('pix')} >Pix</button>
+        </div>
+        <div>
+          {value ? <div>
+          <Search  search={searchClient} changeInputSearch={changeInputSearchClient} />
+           {clients?.map((client) => {
+        return <div key={client._id} onClick={() => {setClient(client._id)}}>
+          <div>{client.name}</div>
+          <div>{client.address}</div>
+        </div>}
+      )}
+      </div>: <button onClick={()=> setValue(true)}>Insira um cliente</button>}
+        </div>
           <button onClick={addOrder}>Salvar Venda</button>
         </div>}
     </div>

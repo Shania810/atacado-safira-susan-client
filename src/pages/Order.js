@@ -7,12 +7,22 @@ export const Order = () => {
   const user = localStorage.getItem('token')
   const typeUser = localStorage.getItem('role')
   const { id } = useParams()
-  const [order, setOrder] = useState({})
+  const [orderId,setOrderId] = useState('')
+  const [seller,setSeller] = useState('')
+  const[client,setClient] = useState('')
+  const [payment,setPayment] = useState('')
+  const [total,setTotal] = useState('')
+  const [orderItems,setOrderItems] = useState([])
   const navigate = useNavigate()
   const getOrder = async (id) => {
     try {
       const order = await Api.getOrder(id)
-      setOrder(order)
+      setOrderId(order._id)
+      setOrderItems(order.order_items)
+      setSeller(order.seller.name)
+      setClient(order.client.name)
+      setPayment(order.payment)
+      setTotal(order.total)
 
     } catch (error) {
       console.log(error)
@@ -21,6 +31,7 @@ export const Order = () => {
   useEffect(() => {
     getOrder(id)
   }, [id])
+
   const deleteOrder = async (id) => {
     try {
       await Api.deleteOrder(id)
@@ -32,7 +43,9 @@ export const Order = () => {
   if (user) {
     return (
       <div>
-        <div>Vendedor(a): {order?.seller}</div>
+        <div>Vendedor(a): {seller}</div>
+        <div>Cliente: {client}</div>
+        <div>Pagamento: {payment}</div>
         <table>
           <thead>
             <tr>
@@ -44,7 +57,7 @@ export const Order = () => {
             </tr>
           </thead>
           <tbody>
-            {order?.order_items?.map((item, index) => {
+            {orderItems.map((item, index) => {
               return <tr key={item._id} >
                 <td>{index + 1}</td>
                 <td>{item.product.name}</td>
@@ -58,12 +71,12 @@ export const Order = () => {
               <td></td>
               <td></td>
               <td></td>
-              <td>{order?.total}</td>
+              <td>{total}</td>
             </tr>
           </tbody>
-        </table>
-        <PrintComponent order={order} />
-        {typeUser === 'admin' && <button onClick={() => deleteOrder(order._id)} >Excluir Pedido</button>}
+        </table>   
+        <PrintComponent order={{seller,client,payment,orderItems,total}} />
+        {typeUser === 'admin' && <button onClick={() => deleteOrder(orderId)} >Excluir Pedido</button>}
       </div>
     )
   } else {

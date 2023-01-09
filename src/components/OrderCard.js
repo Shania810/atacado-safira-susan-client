@@ -7,7 +7,7 @@ export const OrderCard = ({ order, number,items }) => {
     <div>
       <Link to={`/pedido/${_id}`}>
         <div>Pedido {items.length - number}</div>
-        <div>Vendedor {seller}</div>
+        <div>Vendedor {seller.name}</div>
         <div>Total {total}</div>
       </Link>
     </div>
