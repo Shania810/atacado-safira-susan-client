@@ -33,7 +33,7 @@ export const Clients = () => {
                     <h1>Clientes</h1>
                     <Search search={search} changeInputSearch={changeInputSearch} />
                     {clients.map((client) => {
-                        return <div>
+                        return <div key={client._id}>
                             <div>{client.name}</div>
                             <button><Link to={`/cliente/${client._id}`}>Veja mais detalhes</Link></button>
                         </div>
