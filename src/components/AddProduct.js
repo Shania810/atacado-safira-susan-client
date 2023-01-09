@@ -5,8 +5,10 @@ import Api from '../utils/api'
 export const AddProduct = () => {
   const [categories, setCategories] = useState([])
   const [name, setName] = useState('')
-  const [category, setCategory] = useState('alimentício')
+  const [category, setCategory] = useState('')
   const [stock, setStock] = useState('')
+  const [commission, setCommission] = useState('')
+  const [price, setPrice] = useState('')
   const [wholesalePrice, setWholesalePrice] = useState('')
   const [retailPrice, setRetailPrice] = useState('')
   const [description, setDescription] = useState('')
@@ -18,6 +20,8 @@ export const AddProduct = () => {
       name,
       category,
       stock: Number(stock),
+      commission_amount: Number(commission),
+      price: Number(price),
       wholesale_price: Number(wholesalePrice),
       retail_price: Number(retailPrice),
       description
@@ -50,12 +54,21 @@ export const AddProduct = () => {
       <div>
         <label>Categoria</label>
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option>Nenhum</option>
           {categories.map((category) => <option key={category._id} >{category.name}</option>)}
         </select>
       </div>
       <div>
         <label>Estoque</label>
         <input type='text' value={stock} onChange={(e) => setStock(e.target.value)} />
+      </div>
+      <div>
+        <label>Valor da comissão</label>
+        <input type='text' value={commission} onChange={(e) => setCommission(e.target.value)} />
+      </div>
+      <div>
+        <label>Preço pago</label>
+        <input type='text' value={price} onChange={(e) => setPrice(e.target.value)} />
       </div>
       <div>
         <label>Preço de atacado</label>
