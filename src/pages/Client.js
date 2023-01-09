@@ -21,12 +21,15 @@ export const Client = () => {
     }
     getClient()
   }, [id])
-
+console.log(client)
   if (user) {
     if (typeUser === 'admin') {
       return (
-        <div>
+        <div key={client._id} >
           <h1>Cliente {client.name}</h1>
+          <div><b>Endereço:</b> {client.address}</div>
+          <div><b>Telefone de contato:</b> {client.phone}</div>
+          <div><b>{client.cpf ? 'CPF' : 'CNPJ'}:</b> {client.cpf ? client.cpf : client.cnpj }</div>
         </div>
       )
     } else {
