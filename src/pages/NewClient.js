@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const AddClient = () => {
+export const NewClient = () => {
   return (
     <div>AddClient</div>
   )
