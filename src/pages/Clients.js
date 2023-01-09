@@ -38,6 +38,7 @@ export const Clients = () => {
                             <button><Link to={`/cliente/${client._id}`}>Veja mais detalhes</Link></button>
                         </div>
                     })}
+                    <button><Link to='/novoCliente'>Cadastrar Cliente</Link></button>
                 </div>
 
             )
