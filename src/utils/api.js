@@ -228,7 +228,7 @@ class Api {
   }
   getProfits = async () => {
     try {
-      const { data } = await this.api.get('/profits')
+      const { data } = await this.api.get('/profit')
       return data
     } catch (error) {
       throw error
