@@ -12,6 +12,7 @@ import { Seller } from './pages/Seller';
 import { Clients } from './pages/Clients';
 import { Client } from './pages/Client';
 import { NewClient } from './pages/NewClient';
+import { Profits } from './pages/Profits';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='/clientes' element={<Clients />} />
         <Route path='/cliente/:id' element={<Client />} />
         <Route path='/novoCliente' element={<NewClient />} />
+        <Route path='/lucros' element={<Profits />} />
       </Routes>
     </div>
   );
