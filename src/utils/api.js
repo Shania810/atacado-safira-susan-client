@@ -173,6 +173,14 @@ class Api {
       throw error
     }
   }
+  getCommissionsBySeller = async (idSeller) => {
+    try {
+      const { data } = await this.api.get(`/seller/${idSeller}/comission`)
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
   getClients = async () => {
     try {
       const { data } = await this.api.get('/client')
@@ -214,6 +222,14 @@ class Api {
   deleteClient = async (idClient) => {
     try {
       await this.api.delete(`/client/${idClient}`)
+    } catch (error) {
+      throw error
+    }
+  }
+  getProfits = async () => {
+    try {
+      const { data } = await this.api.get('/profits')
+      return data
     } catch (error) {
       throw error
     }
