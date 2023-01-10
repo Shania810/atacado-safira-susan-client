@@ -175,7 +175,7 @@ class Api {
   }
   getCommissionsBySeller = async (idSeller) => {
     try {
-      const { data } = await this.api.get(`/seller/${idSeller}/comission`)
+      const { data } = await this.api.get(`/seller/${idSeller}/commission`)
       return data
     } catch (error) {
       throw error
