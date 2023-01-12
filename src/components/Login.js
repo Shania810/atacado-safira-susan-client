@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Api from '../utils/api'
 
-export const LogIn = () => {
+export const Login = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
