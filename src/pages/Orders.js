@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'
 import { NoUser } from './NoUser'
 export const Orders = () => {
   const user = localStorage.getItem('token')
-  const [orders, setOrders] = useState([])
+  const [dates, setDates] = useState([])
   const allOrders = async () => {
     try {
-      const orders = await Api.getOrders()
-      setOrders(orders)
+      const datesWithOrdesFitered = await Api.getOrders()
+      setDates(datesWithOrdesFitered)
     } catch (error) {
       console.log(error)
     }
@@ -21,7 +21,12 @@ export const Orders = () => {
     return (
       <div>
         <h1>Pedidos</h1>
-        {orders.map((order, index, items) => <OrderCard key={order._id} order={order} number={index} items={items} />)}
+        {dates.map(({date,orders})=>{
+          return <div style={{border:'1px solid black'}} >
+            <h1>{date}</h1>
+            {orders.map((order,index,items)=> <OrderCard key={order._id} order={order} number={index} items={items} />)}
+          </div>
+          })}
         <button><Link to='/novoPedido'>Nova venda</Link></button>
       </div>
     )
