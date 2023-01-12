@@ -83,6 +83,13 @@ class Api {
       throw error
     }
   }
+  uploadImageProduct = async (idProduct) => {
+    try {
+      await this.api.put(`/product/${idProduct}/upload-image`)
+    } catch (error) {
+      throw error
+    }
+  }
   putProduct = async (idProduct, update) => {
     try {
       await this.api.put(`/product/${idProduct}`, update)
