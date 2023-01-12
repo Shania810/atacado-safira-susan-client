@@ -8,6 +8,7 @@ export const Order = () => {
   const typeUser = localStorage.getItem('role')
   const { id } = useParams()
   const [orderId,setOrderId] = useState('')
+  const[date,setDate] = useState('')
   const [seller,setSeller] = useState('')
   const[client,setClient] = useState('')
   const [payment,setPayment] = useState('')
@@ -18,6 +19,7 @@ export const Order = () => {
     try {
       const order = await Api.getOrder(id)
       setOrderId(order._id)
+      setDate(order.date)
       setOrderItems(order.order_items)
       setSeller(order.seller.name)
       setClient(order.client.name)
@@ -43,6 +45,7 @@ export const Order = () => {
   if (user) {
     return (
       <div>
+        <div>{date}</div>
         <div>Vendedor(a): {seller}</div>
         <div>Cliente: {client}</div>
         <div>Pagamento: {payment}</div>
