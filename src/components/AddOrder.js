@@ -110,6 +110,9 @@ export const AddOrder = () => {
       {products?.map((product) => {
         return <div key={product._id} onClick={() => addOrderItem(product)}>
           <div>{product.name}</div>
+          <div>
+            <img style={{maxWidth:50,width:'100%',maxHeight:50,height:'100%'}} src={product.imageURL} alt={product.imageURL} />
+          </div>
           <div>{product.stock}</div>
           <div>{product.category.name}</div>
         </div>
