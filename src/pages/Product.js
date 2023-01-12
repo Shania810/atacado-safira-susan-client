@@ -10,6 +10,7 @@ export const Product = () => {
   const [categories, setCategories] = useState([])
   const [product, setProduct] = useState({})
   const [name, setName] = useState('')
+  const [image,setImage] = useState('')
   const [category, setCategory] = useState('')
   const [price,setPrice] = useState('')
   const [retailPrice, setRetailPrice] = useState('')
@@ -26,6 +27,7 @@ export const Product = () => {
     try {
       const product = await Api.getProduct(idProduct)
       setProduct(product)
+      setImage(product.imageURL)
       setName(product.name)
       setStock(product.stock)
       setCategory(product.category.name)
@@ -83,7 +85,9 @@ export const Product = () => {
   if(user){
   return (
     <div>
-
+      <div>
+         <img src={image} alt={image}  style={{ maxWidth: 200, width: '100%', maxHeight: 300, height: '100%' }} />
+      </div>
       <div>
         {showEdit ? <div><b>Nome do produto:</b><input type='text' value={name} onChange={(e) => setName(e.target.value)} /></div> : <div><b>Nome do produto: {product?.name}</b>
         </div>}

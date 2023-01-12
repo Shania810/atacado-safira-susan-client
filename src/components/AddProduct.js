@@ -63,7 +63,7 @@ export const AddProduct = () => {
       setImageURL('')
     }
   }
-  console.log(imageURL)
+  
   return (
     <div>
       <h1>Novo produto</h1>
