@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Api from '../utils/api'
+import { ImImage } from 'react-icons/im'
 import { NoUser } from './NoUser'
 
 export const Product = () => {
@@ -10,13 +11,16 @@ export const Product = () => {
   const [categories, setCategories] = useState([])
   const [product, setProduct] = useState({})
   const [name, setName] = useState('')
-  const [image,setImage] = useState('')
+  const [imageURL, setImageURL] = useState('')
+  const [file, setFile] = useState('')
+  const inputFileRef = useRef()
+  const [image, setImage] = useState('')
   const [category, setCategory] = useState('')
-  const [price,setPrice] = useState('')
+  const [price, setPrice] = useState('')
   const [retailPrice, setRetailPrice] = useState('')
   const [wholesalePrice, setWholesalePrice] = useState('')
   const [stock, setStock] = useState('')
-  const [commission,setCommission] = useState('')
+  const [commission, setCommission] = useState('')
   const [description, setDescription] = useState('')
 
   const [showEdit, setShowEdit] = useState(false)
@@ -40,7 +44,7 @@ export const Product = () => {
       console.log(error)
     }
   }
- useEffect(() => {
+  useEffect(() => {
     getProduct(id)
   }, [id])
   const updateProduct = async (product) => {
@@ -56,13 +60,14 @@ export const Product = () => {
     }
     try {
       await Api.putProduct(product._id, newProduct)
+      await Api.uploadImageProduct(product._id, file)
       await getProduct(id)
       setShowEdit(false)
     } catch (error) {
       console.log(error)
     }
   }
-  const deleteProduct = async(idProduct)=>{
+  const deleteProduct = async (idProduct) => {
     try {
       await Api.deleteProduct(idProduct)
       navigate('/estoque')
@@ -82,53 +87,77 @@ export const Product = () => {
     allCategories()
   }, [])
 
-  if(user){
-  return (
-    <div>
+  const clickInputFile = () => {
+    inputFileRef.current.click()
+  }
+  const handleChangeImage = (e) => {
+    const file = e.target.files[0]
+    setFile(file)
+    if (file !== '') {
+      const imageURL = URL.createObjectURL(file)
+      setImageURL(imageURL)
+    } else {
+      setImageURL('')
+    }
+  }
+
+
+  if (user) {
+    return (
       <div>
-         <img src={image} alt={image}  style={{ maxWidth: 200, width: '100%', maxHeight: 300, height: '100%' }} />
-      </div>
-      <div>
-        {showEdit ? <div><b>Nome do produto:</b><input type='text' value={name} onChange={(e) => setName(e.target.value)} /></div> : <div><b>Nome do produto: {product?.name}</b>
+        {showEdit ? <div>
+          <input style={{ display: 'none' }} type='file' onChange={handleChangeImage} accept='image/*' ref={inputFileRef} />
+          {imageURL === '' ? <div><div style={{ fontSize: 120 }}>
+            <ImImage />
+          </div></div> : <div>
+            <img style={{ maxWidth: 200, width: '100%', maxHeight: 300, height: '100%' }} src={imageURL} alt={imageURL} />
+          </div>}
+          <button onClick={clickInputFile} >Selecionar Image</button>
+        </div> : <div>
+          <img src={image} alt={image} style={{ maxWidth: 200, width: '100%', maxHeight: 300, height: '100%' }} />
         </div>}
-      </div>
+        <div>
 
-      <div>
-        {showEdit ? <div><b>Categoria:</b><select type='text' value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option>Nenhum</option>
-          {categories.map((category) => <option key={category._id} >{category?.name}</option>)}</select></div> :
-          <div><b>Categoria: {product?.category?.name}</b></div>}
-      </div>
-        
-      <div>
-        {typeUser === 'admin' && showEdit ? <div><b>Preço pago</b><input type='text' value={price} onChange={(e) => setPrice(e.target.value)} /> </div> : <div><b>Preço pago: {product?.price}</b></div>}
-      </div>
+          {showEdit ? <div><b>Nome do produto:</b><input type='text' value={name} onChange={(e) => setName(e.target.value)} /></div> : <div><b>Nome do produto: {product?.name}</b>
+          </div>}
+        </div>
 
-      <div>
-        {showEdit ? <div><b>Preço de atacado</b><input type='text' value={wholesalePrice} onChange={(e) => setWholesalePrice(e.target.value)} /> </div> : <div><b>Preço de atacado: {product?.wholesale_price}</b></div>}
-      </div>
+        <div>
+          {showEdit ? <div><b>Categoria:</b><select type='text' value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option>Nenhum</option>
+            {categories.map((category) => <option key={category._id} >{category?.name}</option>)}</select></div> :
+            <div><b>Categoria: {product?.category?.name}</b></div>}
+        </div>
 
-      <div>
-        {showEdit ? <div><b>Preço de varejo:</b><input type='text' value={retailPrice} onChange={(e) => setRetailPrice(e.target.value)} /></div> : <div><b>Preço de varejo: {product?.retail_price}</b></div>}
-      </div>
+        <div>
+          {typeUser === 'admin' && showEdit ? <div><b>Preço pago</b><input type='text' value={price} onChange={(e) => setPrice(e.target.value)} /> </div> : <div><b>Preço pago: {product?.price}</b></div>}
+        </div>
 
-      <div>
-        {showEdit ? <div><b>Estoque:</b><input type='text' value={stock} onChange={(e) => setStock(e.target.value)} /></div> : <div><b>Estoque: {product?.stock}</b></div>}
-      </div>
+        <div>
+          {showEdit ? <div><b>Preço de atacado</b><input type='text' value={wholesalePrice} onChange={(e) => setWholesalePrice(e.target.value)} /> </div> : <div><b>Preço de atacado: {product?.wholesale_price}</b></div>}
+        </div>
 
-      <div>
-        {showEdit ? <div><b>Valor da comissão</b><input type='text' value={commission} onChange={(e) => setCommission(e.target.value)} /> </div> : <div><b>Valor da comissão: {product?.commission_amount}</b></div>}
-      </div>
+        <div>
+          {showEdit ? <div><b>Preço de varejo:</b><input type='text' value={retailPrice} onChange={(e) => setRetailPrice(e.target.value)} /></div> : <div><b>Preço de varejo: {product?.retail_price}</b></div>}
+        </div>
 
-      <div>
-        {typeUser === 'admin' && showEdit ? <div><b>Descrição:</b><input type='text' value={description} onChange={(e) => setDescription(e.target.value)} /></div> : <div><b>Descrição: {product?.description}</b></div>}
-      </div>
+        <div>
+          {showEdit ? <div><b>Estoque:</b><input type='text' value={stock} onChange={(e) => setStock(e.target.value)} /></div> : <div><b>Estoque: {product?.stock}</b></div>}
+        </div>
 
-      {typeUser === 'admin' && showEdit ? <button type='submit' onClick={() => updateProduct(product)}>Salvar Alterações</button> : <button type='submit' onClick={() => setShowEdit(true)}>Atualizar produto</button>  }
-      {typeUser === 'admin' && <button onClick={()=> deleteProduct(product._id)} >Excluir Produto</button>}
-    </div>
-  )
-  }else{
-    return <NoUser/>
+        <div>
+          {showEdit ? <div><b>Valor da comissão</b><input type='text' value={commission} onChange={(e) => setCommission(e.target.value)} /> </div> : <div><b>Valor da comissão: {product?.commission_amount}</b></div>}
+        </div>
+
+        <div>
+          {typeUser === 'admin' && showEdit ? <div><b>Descrição:</b><input type='text' value={description} onChange={(e) => setDescription(e.target.value)} /></div> : <div><b>Descrição: {product?.description}</b></div>}
+        </div>
+
+        {typeUser === 'admin' && showEdit ? <button type='submit' onClick={() => updateProduct(product)}>Salvar Alterações</button> : <button type='submit' onClick={() => setShowEdit(true)}>Atualizar produto</button>}
+        {typeUser === 'admin' && <button onClick={() => deleteProduct(product._id)} >Excluir Produto</button>}
+      </div>
+    )
+  } else {
+    return <NoUser />
   }
 }
