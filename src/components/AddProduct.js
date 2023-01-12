@@ -32,6 +32,7 @@ export const AddProduct = () => {
     }
     try {
       const newProduct = await Api.postProduct(product)
+      await Api.uploadImageProduct(newProduct._id, file)
       navigate('/estoque')
     } catch (error) {
       console.log(error)
@@ -71,7 +72,7 @@ export const AddProduct = () => {
         {imageURL === '' ? <div style={{ fontSize: 120 }}>
           <ImImage />
         </div> : <div>
-          <img style={{ width: 180, height: 90 }} src={imageURL} alt={imageURL} />
+          <img style={{ maxWidth: 200, width: '100%', maxHeight: 300, height: '100%' }} src={imageURL} alt={imageURL} />
         </div>}
         <button onClick={clickInputFile} >Selecionar Image</button>
       </div>

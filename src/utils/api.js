@@ -78,14 +78,17 @@ class Api {
   }
   postProduct = async (newProduct) => {
     try {
-      await this.api.post('/product', newProduct)
+      const { data } = await this.api.post('/product', newProduct)
+      return data
     } catch (error) {
       throw error
     }
   }
-  uploadImageProduct = async (idProduct) => {
+  uploadImageProduct = async (idProduct, file) => {
+    const formData = new FormData()
+    formData.append('image', file)
     try {
-      await this.api.put(`/product/${idProduct}/upload-image`)
+      await this.api.put(`/product/${idProduct}/upload-image`, formData)
     } catch (error) {
       throw error
     }
