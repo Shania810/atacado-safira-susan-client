@@ -14,6 +14,8 @@ import { Clients } from './pages/Clients';
 import { Client } from './pages/Client';
 import { NewClient } from './pages/NewClient';
 import { Profits } from './pages/Profits';
+import { Signup } from './pages/Signup';
+import { Login } from './pages/Login';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
       <NavBar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/criarConta' element={<Signup />} />
+        <Route path='/acessarConta' element={<Login />} />
         <Route path='/estoque' element={<Stock />} />
         <Route path='/produto/:id' element={<Product />} />
         <Route path='/novoProduto' element={<NewProduct />} />
