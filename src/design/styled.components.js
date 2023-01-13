@@ -75,7 +75,9 @@ const ButtonBlue = styled.button`
 `
 const ButtonGreen = styled.button`
   background: #0a7568;
-  color:#acccbc;
+  color:white;
+  font-size:  20px;
+  font-weight: bold;
   border: 0;
   width: 250px;
   padding: 10px 20px;
