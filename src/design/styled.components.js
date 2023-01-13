@@ -20,6 +20,12 @@ const NavLink = styled(Link)`
   padding: 6px 0;
   border-bottom: 3px solid white;
 `
+const ButtonLink = styled(Link)`
+  text-decoration: none;
+  font-size:  20px;
+  font-weight: bold;
+  color: white;
+`
 const IconMenu = styled.div`
   font-size: 30px;
   position: fixed;
@@ -48,6 +54,31 @@ const Title = styled.div`
   color:#184848;
   font-size:25px;
 `
+
+const Buttons = styled.div`
+  display:flex;
+  flex-direction:column;
+  height: 100px;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const ButtonBlue = styled.button`
+  background:#3c6c94;
+  color:#a0bfd8;
+  border:0;
+  width: 250px;
+  padding: 10px 20px;
+  border-radius: 20px;
+`
+const ButtonGreen = styled.button`
+  background: #0a7568;
+  color:#acccbc;
+  border: 0;
+  width: 250px;
+  padding: 10px 20px;
+  border-radius: 20px;
+` 
 const CardProduct = styled.div`
   border: 3px solid black;
   margin: 20px;
@@ -58,4 +89,4 @@ const CategoriesCard = styled.div`
   justify-content: center;
   margin: 10px;
 `
-export { Nav,NavLink,IconMenu,Title,Container, CardProduct, CategoriesCard }
+export { Nav,NavLink,ButtonLink,IconMenu,Title,Container,Buttons,ButtonBlue,ButtonGreen, CardProduct, CategoriesCard }

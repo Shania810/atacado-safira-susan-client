@@ -1,14 +1,20 @@
 import React from 'react'
-import { Container, Title } from '../design/styled.components'
-import { Auth } from './Auth'
+import { ButtonBlue, ButtonGreen, Buttons, Container, Title, ButtonLink } from '../design/styled.components'
 
 export const Home = () => {
   return (
     <Container>
       <Title>
         <h1>Atacado Safira Susan</h1>
-        </Title>
-      <Auth />
+      </Title>
+      <Buttons>
+        <div>
+          <ButtonBlue><ButtonLink to='/criarConta'>Criar Conta</ButtonLink></ButtonBlue>
+        </div>
+        <div>
+          <ButtonGreen><ButtonLink to='/acessarConta'>Acessar Conta</ButtonLink></ButtonGreen>
+        </div>
+      </Buttons>
     </Container>
   )
 }
