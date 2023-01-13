@@ -32,13 +32,22 @@ const IconMenu = styled.div`
   z-index:1;
 `
 const Container = styled.div`
+  display:flex;
+  justify-content:center;
+  flex-direction:column;
   text-align:center;
   position:relative;
-  top:40px;
+  top:50px;
   z-index:0;
   margin:0;
 `
 
+const Title = styled.div`
+  display:flex;
+  justify-content:center;
+  color:#184848;
+  font-size:25px;
+`
 const CardProduct = styled.div`
   border: 3px solid black;
   margin: 20px;
@@ -49,4 +58,4 @@ const CategoriesCard = styled.div`
   justify-content: center;
   margin: 10px;
 `
-export { Nav,NavLink,IconMenu,Container, CardProduct, CategoriesCard }
+export { Nav,NavLink,IconMenu,Title,Container, CardProduct, CategoriesCard }

@@ -1,11 +1,13 @@
 import React from 'react'
-import { Container } from '../design/styled.components'
+import { Container, Title } from '../design/styled.components'
 import { Auth } from './Auth'
 
 export const Home = () => {
   return (
     <Container>
-      <h1>Atacado Safira Susan</h1>
+      <Title>
+        <h1>Atacado Safira Susan</h1>
+        </Title>
       <Auth />
     </Container>
   )
