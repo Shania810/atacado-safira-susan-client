@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Api from '../utils/api'
 import { ImImage } from 'react-icons/im'
 import { NoUser } from './NoUser'
+import {Container} from '../design/styled.components'
 
 export const Product = () => {
   const user = localStorage.getItem('token')
@@ -104,7 +105,7 @@ export const Product = () => {
 
   if (user) {
     return (
-      <div>
+      <Container>
         {showEdit ? <div>
           <input style={{ display: 'none' }} type='file' onChange={handleChangeImage} accept='image/*' ref={inputFileRef} />
           {imageURL === '' ? <div><div style={{ fontSize: 120 }}>
@@ -155,7 +156,7 @@ export const Product = () => {
 
         {typeUser === 'admin' && showEdit ? <button type='submit' onClick={() => updateProduct(product)}>Salvar Alterações</button> : <button type='submit' onClick={() => setShowEdit(true)}>Atualizar produto</button>}
         {typeUser === 'admin' && <button onClick={() => deleteProduct(product._id)} >Excluir Produto</button>}
-      </div>
+      </Container>
     )
   } else {
     return <NoUser />

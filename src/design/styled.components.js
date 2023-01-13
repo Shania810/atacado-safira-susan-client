@@ -127,13 +127,13 @@ const Div = styled.div`
   z-index: ${props => props.zIndex};
 `
 const CardProduct = styled.div`
-  width: 30%;
-  height: 250px;
+  text-align: left;
+  width: 100%;
   font-weight: bold;
   border: 7px solid #5c9c8c;
   border-radius: 30px;
-  margin: 10px;
-  padding:10px;
+  padding: 5px 8px;
+  margin:10px;
   background:#ffffff;
 `
 const DivLink = styled(Link)`
@@ -141,6 +141,10 @@ const DivLink = styled(Link)`
   color:${props => props.color};
   width:${props => props.width}px;
   border:${props => props.border};
+  display:flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items:center;
 `
 const CategoriesCard = styled.div`
   display: flex;
@@ -153,7 +157,7 @@ const CategoriesCard = styled.div`
   padding: 10px 0;
 `
 const ImageCard = styled.img`
-  width:100%;
+  width: 100%;
   max-width:${props => props.width}px;
   height:${props => props.height}px;
 `
