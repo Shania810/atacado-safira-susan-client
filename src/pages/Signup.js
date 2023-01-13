@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Api from '../utils/api'
+import { ButtonBlue,Container, Title,LabelInput, Form, Label, Input } from '../design/styled.components'
 
 export const Signup = () => {
     const [name, setName] = useState('')
@@ -22,17 +23,21 @@ export const Signup = () => {
       }
     }
     return (
-      <form onSubmit={(e) => newUser(e)} >
-        <h1>Criar Conta</h1>
+     <Container>  
+      <Form onSubmit={(e) => newUser(e)} >
+        <Title color='#3c6c94'><h1>Criar Conta</h1></Title>
+        <LabelInput>
+          <Label>Nome do Usuário</Label>
+          <Input type='text' value={name} onChange={(e) => setName(e.target.value)} />
+        </LabelInput>
+        <LabelInput>
+          <Label>Senha do Usuário</Label>
+          <Input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+        </LabelInput>
         <div>
-          <label>Nome do Usuário</label>
-          <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
+        <ButtonBlue type='submit'>Criar Usuário</ButtonBlue>
         </div>
-        <div>
-          <label>Senha do Usuário</label>
-          <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type='submit'>Criar Usuário</button>
-      </form>
+      </Form>
+      </Container>
     )
 }

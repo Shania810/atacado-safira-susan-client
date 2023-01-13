@@ -5,7 +5,7 @@ const Nav = styled.nav`
   flex-direction: column;
   width:50%;
   height: 100vh;
-  background:#acccbc;
+  background:#c1c9c8;
   padding:5px;
   position:fixed;
   top:50px;
@@ -32,7 +32,7 @@ const IconMenu = styled.div`
   width: 100%;
   top:0;
   left:0;
-  background:#0a7568;
+  background:#080d0d;
   color:white;
   padding: 5px 10px;
   z-index:1;
@@ -51,7 +51,7 @@ const Container = styled.div`
 const Title = styled.div`
   display:flex;
   justify-content:center;
-  color:#184848;
+  color:${props => props.color};
   font-size:25px;
 `
 
@@ -65,7 +65,9 @@ const Buttons = styled.div`
 
 const ButtonBlue = styled.button`
   background:#3c6c94;
-  color:#a0bfd8;
+  color:white;
+  font-size:  20px;
+  font-weight: bold;
   border:0;
   width: 250px;
   padding: 10px 20px;
@@ -79,6 +81,23 @@ const ButtonGreen = styled.button`
   padding: 10px 20px;
   border-radius: 20px;
 ` 
+
+const Form = styled.form`
+   
+`
+const LabelInput = styled.div`
+  margin: 20px 0;
+`
+const Label = styled.label`
+  color: #2d3839;
+  font-weight: bold;
+  font-size: 20px;
+`
+const Input = styled.input`
+  width: 90%;
+  height: 30px;
+  border: 0;
+`
 const CardProduct = styled.div`
   border: 3px solid black;
   margin: 20px;
@@ -89,4 +108,4 @@ const CategoriesCard = styled.div`
   justify-content: center;
   margin: 10px;
 `
-export { Nav,NavLink,ButtonLink,IconMenu,Title,Container,Buttons,ButtonBlue,ButtonGreen, CardProduct, CategoriesCard }
+export { Nav,NavLink,ButtonLink,IconMenu,Title,Container,Buttons,ButtonBlue,ButtonGreen,Form,LabelInput,Label,Input, CardProduct, CategoriesCard }
