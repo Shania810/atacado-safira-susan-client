@@ -88,9 +88,10 @@ const Button = styled.button`
   background: ${props => props.background};
   border: 5px solid ${props => props.border};
   border-radius: 40px;
-  width: ${props => props.width}
+  width: ${props => props.width}px;
   height: 50px;
   padding: 5px 10px;
+  margin: 0 5px;
   font-weight: ${props => props.bold && 'bold'};
   font-size: ${props => props.size}px;
 `
@@ -129,8 +130,12 @@ const CardProduct = styled.div`
 `
 const CategoriesCard = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 10px;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  flex-direction: row;
+  margin: 10px 0;
+  height: 40px;
+  padding: 10px 0;
 `
 export { Nav,NavLink,ButtonLink,IconMenu,Title,Container,Div,Buttons,ButtonBlue,ButtonGreen,Button,Form,LabelInput,Label,Input, CardProduct, CategoriesCard }
