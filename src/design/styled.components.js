@@ -24,7 +24,7 @@ const ButtonLink = styled(Link)`
   text-decoration: none;
   font-size:  20px;
   font-weight: bold;
-  color: white;
+  color: ${props => props.color};
 `
 const IconMenu = styled.div`
   font-size: 30px;
@@ -83,10 +83,18 @@ const ButtonGreen = styled.button`
   padding: 10px 20px;
   border-radius: 20px;
 ` 
-
+const Button = styled.button`
+  color: ${props => props.color};
+  background: ${props => props.background};
+  border: 5px solid ${props => props.border};
+  border-radius: 40px;
+  width: 70%;
+  height: 50px;
+`
 const Form = styled.form`
    
 `
+
 const LabelInput = styled.div`
   margin: 20px 0;
 `
@@ -100,6 +108,15 @@ const Input = styled.input`
   height: 30px;
   border: 0;
 `
+const Div = styled.div`
+  width: 100%;
+  align-items:center;
+  padding: 10px 0;
+  background: ${props => props.background};
+  position: ${props => props.position};
+  bottom: ${props => props.bottom};
+  z-index: ${props => props.zIndex};
+`
 const CardProduct = styled.div`
   border: 3px solid black;
   margin: 20px;
@@ -110,4 +127,4 @@ const CategoriesCard = styled.div`
   justify-content: center;
   margin: 10px;
 `
-export { Nav,NavLink,ButtonLink,IconMenu,Title,Container,Buttons,ButtonBlue,ButtonGreen,Form,LabelInput,Label,Input, CardProduct, CategoriesCard }
+export { Nav,NavLink,ButtonLink,IconMenu,Title,Container,Div,Buttons,ButtonBlue,ButtonGreen,Button,Form,LabelInput,Label,Input, CardProduct, CategoriesCard }
