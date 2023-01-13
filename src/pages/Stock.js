@@ -36,7 +36,7 @@ export const Stock = () => {
           <Categories productsFiltered={productsFiltered} user={typeUser} />
           <Products products={products} />
           {typeUser === 'admin' && <Div background='#f0f0f0' position='fixed' zIndex='1' bottom='0' >
-            <Button background='#a0bfd8' border='#3c6c94'><ButtonLink color='#3c6c94' to='/novoProduto'>Adicione Produto</ButtonLink></Button>
+            <Button width='70%' background='#a0bfd8' border='#3c6c94'><ButtonLink color='#3c6c94' to='/novoProduto'>Adicione Produto</ButtonLink></Button>
           </Div>}
         </div>
       </Container>

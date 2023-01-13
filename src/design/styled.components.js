@@ -88,8 +88,11 @@ const Button = styled.button`
   background: ${props => props.background};
   border: 5px solid ${props => props.border};
   border-radius: 40px;
-  width: 70%;
+  width: ${props => props.width}
   height: 50px;
+  padding: 5px 10px;
+  font-weight: ${props => props.bold && 'bold'};
+  font-size: ${props => props.size}px;
 `
 const Form = styled.form`
    
@@ -109,6 +112,9 @@ const Input = styled.input`
   border: 0;
 `
 const Div = styled.div`
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
   width: 100%;
   align-items:center;
   padding: 10px 0;
