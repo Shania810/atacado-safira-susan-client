@@ -114,19 +114,33 @@ const Input = styled.input`
 `
 const Div = styled.div`
   display:flex;
-  flex-direction: row;
+  flex-wrap:${props => props.wrap};
+  flex-direction:${props => props.direction};
   justify-content: center;
   width: 100%;
   align-items:center;
   padding: 10px 0;
+  margin:${props => props.margin};
   background: ${props => props.background};
   position: ${props => props.position};
   bottom: ${props => props.bottom};
   z-index: ${props => props.zIndex};
 `
 const CardProduct = styled.div`
-  border: 3px solid black;
-  margin: 20px;
+  width: 30%;
+  height: 250px;
+  font-weight: bold;
+  border: 7px solid #5c9c8c;
+  border-radius: 30px;
+  margin: 10px;
+  padding:10px;
+  background:#ffffff;
+`
+const DivLink = styled(Link)`
+  text-decoration: none;
+  color:${props => props.color};
+  width:${props => props.width}px;
+  border:${props => props.border};
 `
 const CategoriesCard = styled.div`
   display: flex;
@@ -138,4 +152,9 @@ const CategoriesCard = styled.div`
   height: 40px;
   padding: 10px 0;
 `
-export { Nav,NavLink,ButtonLink,IconMenu,Title,Container,Div,Buttons,ButtonBlue,ButtonGreen,Button,Form,LabelInput,Label,Input, CardProduct, CategoriesCard }
+const ImageCard = styled.img`
+  width:100%;
+  max-width:${props => props.width}px;
+  height:${props => props.height}px;
+`
+export { Nav,NavLink,ButtonLink,IconMenu,Title,Container,Div,DivLink,Buttons,ButtonBlue,ButtonGreen,Button,Form,LabelInput,Label,Input, CardProduct, CategoriesCard,ImageCard }
