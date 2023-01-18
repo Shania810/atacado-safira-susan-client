@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Api from '../utils/api'
 import { ImImage } from 'react-icons/im'
+import { Button, Container, Div, Label, Title} from '../design/styled.components'
 
 export const AddProduct = () => {
   const [categories, setCategories] = useState([])
@@ -65,8 +66,8 @@ export const AddProduct = () => {
   }
   
   return (
-    <div>
-      <h1>Novo produto</h1>
+    <Container alignItems='center' >
+      <Title bold='bold' >Novo produto</Title>
       <div>
         <input style={{ display: 'none' }} type='file' onChange={handleChangeImage} accept='image/*' ref={inputFileRef} />
         {imageURL === '' ? <div style={{ fontSize: 120 }}>
@@ -74,46 +75,50 @@ export const AddProduct = () => {
         </div> : <div>
           <img style={{ maxWidth: 200, width: '100%', maxHeight: 300, height: '100%' }} src={imageURL} alt={imageURL} />
         </div>}
-        <button onClick={clickInputFile} >Selecionar Image</button>
+        <Button  color='#ffffff'  border='#000000' background='#000000' onClick={clickInputFile} >Selecionar Image</Button>
       </div>
       <form onSubmit={newProduct} >
+       <Div direction='column' background='#ffffff' margin='8px' padding='20px' radius='10%'  >
         <div>
-          <label>Nome do produto</label>
+          <Label>Nome do produto</Label>
           <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div>
-          <label>Categoria</label>
+          <Label>Categoria</Label>
           <select value={category} onChange={(e) => setCategory(e.target.value)}>
             <option>Nenhum</option>
             {categories.map((category) => <option key={category._id} >{category.name}</option>)}
           </select>
         </div>
         <div>
-          <label>Estoque</label>
+          <Label>Estoque</Label>
           <input type='text' value={stock} onChange={(e) => setStock(e.target.value)} />
         </div>
         <div>
-          <label>Valor da comissão</label>
+          <Label>Valor da comissão</Label>
           <input type='text' value={commission} onChange={(e) => setCommission(e.target.value)} />
         </div>
         <div>
-          <label>Preço pago</label>
+          <Label>Preço pago</Label>
           <input type='text' value={price} onChange={(e) => setPrice(e.target.value)} />
         </div>
         <div>
-          <label>Preço de atacado</label>
+          <Label>Preço de atacado</Label>
           <input type='text' value={wholesalePrice} onChange={(e) => setWholesalePrice(e.target.value)} />
         </div>
         <div>
-          <label>Preço de varejo</label>
+          <Label>Preço de varejo</Label>
           <input type='text' value={retailPrice} onChange={(e) => setRetailPrice(e.target.value)} />
         </div>
         <div>
-          <label>Descrição</label>
+          <Label>Descrição</Label>
           <input type='text' value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
-        <button type='submit'>Adicionar produto</button>
+        </Div>
+        <Div>
+        <Button color='#ffffff'  border='#00914c' background='#00914c' type='submit'>Adicionar produto</Button>
+        </Div>
       </form>
-    </div>
+    </Container>
   )
 }

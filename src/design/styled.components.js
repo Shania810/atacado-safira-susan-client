@@ -45,6 +45,7 @@ const Container = styled.div`
   top:50px;
   z-index:0;
   margin:0 10px;
+  align-items:${props => props.alignItems};
 `
 
 const Title = styled.div`
@@ -52,6 +53,7 @@ const Title = styled.div`
   justify-content:center;
   color:${props => props.color};
   font-size:25px;
+  font-weight:${props => props.bold};
 `
 
 const Buttons = styled.div`
@@ -96,16 +98,21 @@ const Button = styled.button`
   font-size: ${props => props.size}px;
 `
 const Form = styled.form`
-   
+   background:${props => props.background};
+   margin:${props => props.margin};
+   padding:${props => props.padding};
+   border-radius:${props => props.radius};
 `
 
 const LabelInput = styled.div`
   margin: 20px 0;
 `
 const Label = styled.label`
-  color: #2d3839;
+//#2d3839
+//20px
+  color: ${props => props.color};
   font-weight: bold;
-  font-size: 20px;
+  font-size: ${props => props.fontSize};
 `
 const Input = styled.input`
   width: 90%;
@@ -119,7 +126,7 @@ const Div = styled.div`
   justify-content: center;
   width: ${props => props.width};
   align-items:${props => props.alignItems};
-  padding: 10px;
+  padding: ${props => props.padding};
   margin:${props => props.margin};
   background: ${props => props.background};
   position: ${props => props.position};
