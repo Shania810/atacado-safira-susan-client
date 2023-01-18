@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Api from '../utils/api'
 import { ImImage } from 'react-icons/im'
 import { NoUser } from './NoUser'
-import {Container} from '../design/styled.components'
+import {Button, Buttons, Container, Div, ImageCard} from '../design/styled.components'
 
 export const Product = () => {
   const user = localStorage.getItem('token')
@@ -106,56 +106,59 @@ export const Product = () => {
   if (user) {
     return (
       <Container>
+        <Div direction='column'>
         {showEdit ? <div>
           <input style={{ display: 'none' }} type='file' onChange={handleChangeImage} accept='image/*' ref={inputFileRef} />
           {imageURL === '' ? <div><div style={{ fontSize: 120 }}>
             <ImImage />
           </div></div> : <div>
-            <img style={{ maxWidth: 200, width: '100%', maxHeight: 300, height: '100%' }} src={imageURL} alt={imageURL} />
+            <ImageCard width='180' height='180' src={imageURL} alt={imageURL} />
           </div>}
-          <button onClick={clickInputFile} >Selecionar Image</button>
+          <Button color='#ffffff'  border='#000000' background='#000000'  onClick={clickInputFile} >Selecionar Imagem</Button>
         </div> : <div>
-          <img src={image} alt={image} style={{ maxWidth: 200, width: '100%', maxHeight: 300, height: '100%' }} />
+          <ImageCard width='180' height='180' radius='20%' src={image} alt={image} />
         </div>}
+
+        <Div width='93%' margin='10px 0' direction='column' background='#ffffff' radius='10%' border='#3c6c94' >
         <div>
-
-          {showEdit ? <div><b>Nome do produto:</b><input type='text' value={name} onChange={(e) => setName(e.target.value)} /></div> : <div><b>Nome do produto: {product?.name}</b>
-          </div>}
+          {showEdit ? <div><b>Nome do produto:</b><input type='text' value={name} onChange={(e) => setName(e.target.value)} /></div> : <div>{product?.name}</div>}
         </div>
-
         <div>
           {showEdit ? <div><b>Categoria:</b><select type='text' value={category} onChange={(e) => setCategory(e.target.value)}>
             <option>Nenhum</option>
             {categories.map((category) => <option key={category._id} >{category?.name}</option>)}</select></div> :
-            <div><b>Categoria: {product?.category?.name}</b></div>}
+            <div><b>Categoria:</b> <div>{product?.category?.name}</div></div>}
         </div>
 
         <div>
-          {typeUser === 'admin' && showEdit ? <div><b>Preço pago</b><input type='text' value={price} onChange={(e) => setPrice(e.target.value)} /> </div> : <div><b>Preço pago: {product?.price}</b></div>}
+          {typeUser === 'admin' && showEdit ? <div><b>Preço pago</b><input type='text' value={price} onChange={(e) => setPrice(e.target.value)} /> </div> : <div><b>Preço pago:</b> <div>R${product?.price}</div></div>}
         </div>
 
         <div>
-          {showEdit ? <div><b>Preço de atacado</b><input type='text' value={wholesalePrice} onChange={(e) => setWholesalePrice(e.target.value)} /> </div> : <div><b>Preço de atacado: {product?.wholesale_price}</b></div>}
+          {showEdit ? <div><b>Preço de atacado</b><input type='text' value={wholesalePrice} onChange={(e) => setWholesalePrice(e.target.value)} /> </div> : <div><b>Preço de atacado:</b> <div>R${product?.wholesale_price}</div></div>}
         </div>
 
         <div>
-          {showEdit ? <div><b>Preço de varejo:</b><input type='text' value={retailPrice} onChange={(e) => setRetailPrice(e.target.value)} /></div> : <div><b>Preço de varejo: {product?.retail_price}</b></div>}
+          {showEdit ? <div><b>Preço de varejo:</b><input type='text' value={retailPrice} onChange={(e) => setRetailPrice(e.target.value)} /></div> : <div><b>Preço de varejo:</b> <div>R${product?.retail_price}</div></div>}
         </div>
 
         <div>
-          {showEdit ? <div><b>Estoque:</b><input type='text' value={stock} onChange={(e) => setStock(e.target.value)} /></div> : <div><b>Estoque: {product?.stock}</b></div>}
+          {showEdit ? <div><b>Estoque:</b><input type='text' value={stock} onChange={(e) => setStock(e.target.value)} /></div> : <div><b>Estoque:</b> <div>{product?.stock} unidades</div></div>}
         </div>
 
         <div>
-          {showEdit ? <div><b>Valor da comissão</b><input type='text' value={commission} onChange={(e) => setCommission(e.target.value)} /> </div> : <div><b>Valor da comissão: {product?.commission_amount}</b></div>}
+          {showEdit ? <div><b>Valor da comissão</b><input type='text' value={commission} onChange={(e) => setCommission(e.target.value)} /> </div> : <div><b>Valor da comissão:</b> <div>R${product?.commission_amount}</div></div>}
         </div>
 
         <div>
-          {typeUser === 'admin' && showEdit ? <div><b>Descrição:</b><input type='text' value={description} onChange={(e) => setDescription(e.target.value)} /></div> : <div><b>Descrição: {product?.description}</b></div>}
+          {typeUser === 'admin' && showEdit ? <div><b>Descrição:</b><input type='text' value={description} onChange={(e) => setDescription(e.target.value)} /></div> : <div><b>Descrição:</b> <div>{product?.description}</div></div>}
         </div>
-
-        {typeUser === 'admin' && showEdit ? <button type='submit' onClick={() => updateProduct(product)}>Salvar Alterações</button> : <button type='submit' onClick={() => setShowEdit(true)}>Atualizar produto</button>}
-        {typeUser === 'admin' && <button onClick={() => deleteProduct(product._id)} >Excluir Produto</button>}
+       </Div>
+        <Buttons direction='row' width='80%' justifyContent='center'>
+        {typeUser === 'admin' && showEdit ? <Button  color='#ffffff'  border='#00914c' background='#00914c' type='submit' onClick={() => updateProduct(product)}>Salvar Alterações</Button> : <Button color='#ffffff'  border='#3c6c94' background='#3c6c94' type='submit' onClick={() => setShowEdit(true)}>Atualizar produto</Button>}
+        {typeUser === 'admin' && <Button color='#ffffff'  background='#e50e0e' border='#e50e0e' onClick={() => deleteProduct(product._id)} >Excluir Produto</Button>}
+        </Buttons>
+        </Div>
       </Container>
     )
   } else {

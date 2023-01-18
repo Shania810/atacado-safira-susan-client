@@ -41,11 +41,10 @@ const Container = styled.div`
   display:flex;
   justify-content:center;
   flex-direction:column;
-  text-align:center;
   position:relative;
   top:50px;
   z-index:0;
-  margin:0;
+  margin:0 10px;
 `
 
 const Title = styled.div`
@@ -57,10 +56,11 @@ const Title = styled.div`
 
 const Buttons = styled.div`
   display:flex;
-  flex-direction:column;
+  flex-direction:${props => props.direction};
+  width:${props => props.width};
   height: 100px;
   align-items: center;
-  justify-content: space-between;
+  justify-content:${props => props.justifyContent};
 `
 
 const ButtonBlue = styled.button`
@@ -117,14 +117,16 @@ const Div = styled.div`
   flex-wrap:${props => props.wrap};
   flex-direction:${props => props.direction};
   justify-content: center;
-  width: 100%;
-  align-items:center;
-  padding: 10px 0;
+  width: ${props => props.width};
+  align-items:${props => props.alignItems};
+  padding: 10px;
   margin:${props => props.margin};
   background: ${props => props.background};
   position: ${props => props.position};
   bottom: ${props => props.bottom};
   z-index: ${props => props.zIndex};
+  border:${props => props.border}px;
+  border-radius:${props => props.radius};
 `
 const CardProduct = styled.div`
   text-align: left;
@@ -157,8 +159,8 @@ const CategoriesCard = styled.div`
   padding: 10px 0;
 `
 const ImageCard = styled.img`
-  width: 100%;
-  max-width:${props => props.width}px;
+  width:${props => props.width}px;
   height:${props => props.height}px;
+  border-radius:${props => props.radius};
 `
 export { Nav,NavLink,ButtonLink,IconMenu,Title,Container,Div,DivLink,Buttons,ButtonBlue,ButtonGreen,Button,Form,LabelInput,Label,Input, CardProduct, CategoriesCard,ImageCard }
