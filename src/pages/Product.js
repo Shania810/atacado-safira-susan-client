@@ -119,7 +119,7 @@ export const Product = () => {
           <ImageCard width='180' height='180' radius='20%' src={image} alt={image} />
         </div>}
 
-        <Div width='93%' margin='10px 0' direction='column' background='#ffffff' radius='10%' border='#3c6c94' >
+        <Div width='93%' margin='10px 0' direction='column' background='#ffffff' radius='10%'>
         <div>
           {showEdit ? <div><b>Nome do produto:</b><input type='text' value={name} onChange={(e) => setName(e.target.value)} /></div> : <div>{product?.name}</div>}
         </div>

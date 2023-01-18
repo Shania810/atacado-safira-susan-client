@@ -125,7 +125,7 @@ const Div = styled.div`
   position: ${props => props.position};
   bottom: ${props => props.bottom};
   z-index: ${props => props.zIndex};
-  border:${props => props.border}px;
+  border: ${props => '5px solid' + props.border};
   border-radius:${props => props.radius};
 `
 const CardProduct = styled.div`
