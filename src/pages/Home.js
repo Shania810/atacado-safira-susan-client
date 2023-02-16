@@ -7,7 +7,7 @@ export const Home = () => {
       <Title>
         <h1>Atacado Safira Susan</h1>
       </Title>
-      <Buttons>
+      <Buttons direction='column' alignItems='center' justifyContent='space-between' height='100px' >
         <div>
           <ButtonBlue><ButtonLink to='/criarConta'>Criar Conta</ButtonLink></ButtonBlue>
         </div>

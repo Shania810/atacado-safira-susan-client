@@ -60,8 +60,8 @@ const Buttons = styled.div`
   display:flex;
   flex-direction:${props => props.direction};
   width:${props => props.width};
-  height: 100px;
-  align-items: center;
+  height:${props => props.height};
+  align-items:${props => props.alignItems};
   justify-content:${props => props.justifyContent};
 `
 

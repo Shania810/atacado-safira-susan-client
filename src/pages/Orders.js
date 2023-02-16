@@ -3,6 +3,7 @@ import Api from '../utils/api'
 import { OrderCard } from '../components/OrderCard'
 import { Link } from 'react-router-dom'
 import { NoUser } from './NoUser'
+import { Container } from '../design/styled.components'
 export const Orders = () => {
   const user = localStorage.getItem('token')
   const [dates, setDates] = useState([])
@@ -19,7 +20,7 @@ export const Orders = () => {
   }, [])
   if (user) {
     return (
-      <div>
+      <Container>
         <h1>Pedidos</h1>
         {dates.map(({date,orders})=>{
           return <div style={{border:'1px solid black'}} >
@@ -28,7 +29,7 @@ export const Orders = () => {
           </div>
           })}
         <button><Link to='/novoPedido'>Nova venda</Link></button>
-      </div>
+      </Container>
     )
   } else {
     return <NoUser />
