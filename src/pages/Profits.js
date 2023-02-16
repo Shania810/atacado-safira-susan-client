@@ -25,7 +25,7 @@ export const Profits = () => {
         <div>
           <h1>Lucros</h1>
           <div>
-            {profits.map((profit) => <Profit key={profit._id} data={profit} />)}
+            {profits.map((profit,index) => <Profit key={index} data={profit} />)}
           </div>
         </div>
       )
