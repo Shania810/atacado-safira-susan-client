@@ -3,21 +3,22 @@ import { Categories } from '../components/Categories'
 import { Products } from '../components/Products'
 import { NoUser } from './NoUser'
 import Api from '../utils/api'
-import { Button, ButtonLink, Container, Div, Title } from '../design/styled.components'
+import { Button,ButtonLink, Container, Div, Title } from '../design/styled.components'
 
 export const Stock = () => {
   const [products, setProducts] = useState([])
   const typeUser = localStorage.getItem('role')
   const user = localStorage.getItem('token')
-  useEffect(() => {
-    const allProducts = async () => {
-      try {
-        const products = await Api.getProducts()
-        setProducts(products)
-      } catch (error) {
-        console.log(error)
-      }
+
+  const allProducts = async () => {
+    try {
+      const products = await Api.getProducts()
+      setProducts(products)
+    } catch (error) {
+      console.log(error)
     }
+  }
+  useEffect(() => {
     allProducts()
   }, [])
   const productsFiltered = async (category) => {
@@ -33,7 +34,7 @@ export const Stock = () => {
       <Container>
         <Title><h1>Estoque</h1></Title>
         <div>
-          <Categories productsFiltered={productsFiltered} user={typeUser} />
+          <Categories allProducts={allProducts}  productsFiltered={productsFiltered} user={typeUser} />
           <Products products={products} />
           {typeUser === 'admin' && <Div width='100%' background='#f0f0f0' position='fixed' zIndex='1' bottom='0' >
             <Button width='70%' background='#a0bfd8' border='#3c6c94'><ButtonLink color='#3c6c94' to='/novoProduto'>Adicione Produto</ButtonLink></Button>
