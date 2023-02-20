@@ -9,10 +9,10 @@ export const Home = () => {
       </Title>
       <Buttons direction='column' alignItems='center' justifyContent='space-between' height='100px' >
         <div>
-          <ButtonBlue><ButtonLink to='/criarConta'>Criar Conta</ButtonLink></ButtonBlue>
+          <ButtonBlue><ButtonLink color='white' to='/criarConta'>Criar Conta</ButtonLink></ButtonBlue>
         </div>
         <div>
-          <ButtonGreen><ButtonLink to='/acessarConta'>Acessar Conta</ButtonLink></ButtonGreen>
+          <ButtonGreen><ButtonLink color='white' to='/acessarConta'>Acessar Conta</ButtonLink></ButtonGreen>
         </div>
       </Buttons>
     </Container>
