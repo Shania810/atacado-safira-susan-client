@@ -16,6 +16,7 @@ import { NewClient } from './pages/NewClient';
 import { Profits } from './pages/Profits';
 import { Signup } from './pages/Signup';
 import { Login } from './pages/Login';
+import { NewCategory } from './pages/NewCategory';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path='/cliente/:id' element={<Client />} />
         <Route path='/novoCliente' element={<NewClient />} />
         <Route path='/lucros' element={<Profits />} />
+        <Route path='/novaCategoria' element={<NewCategory/>}/>
       </Routes>
     </div>
   );
