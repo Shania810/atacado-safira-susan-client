@@ -102,6 +102,8 @@ const Form = styled.form`
    margin:${props => props.margin};
    padding:${props => props.padding};
    border-radius:${props => props.radius};
+   display:flex;
+   justify-content:center;
 `
 
 const LabelInput = styled.div`
