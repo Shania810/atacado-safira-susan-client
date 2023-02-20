@@ -104,6 +104,7 @@ const Form = styled.form`
    border-radius:${props => props.radius};
    display:flex;
    justify-content:center;
+   flex-direction:column;
 `
 
 const LabelInput = styled.div`

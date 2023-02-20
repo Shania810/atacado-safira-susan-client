@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Api from '../utils/api'
-import { Container, Title,LabelInput, Form, Label, Input, ButtonGreen } from '../design/styled.components'
+import { Container, Title,LabelInput, Form, Label, Input, ButtonGreen} from '../design/styled.components'
 
 export const Login = () => {
   const [name, setName] = useState('')
@@ -23,7 +23,7 @@ export const Login = () => {
     }
   }
   return (
-   <Container>
+   <Container alignItems='center'>
     <Form onSubmit={(e) => verifyUser(e)} >
       <Title color='#0a7568'><h1>Logar conta</h1></Title>
       <LabelInput>

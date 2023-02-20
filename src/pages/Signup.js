@@ -23,7 +23,7 @@ export const Signup = () => {
       }
     }
     return (
-     <Container>  
+     <Container alignItems='center'>  
       <Form onSubmit={(e) => newUser(e)} >
         <Title color='#3c6c94'><h1>Criar Conta</h1></Title>
         <LabelInput>
